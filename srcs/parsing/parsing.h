@@ -6,6 +6,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <curses.h>
 
 typedef struct s_map
 {
@@ -13,9 +14,15 @@ typedef struct s_map
 	char *s_texture;
 	char *w_texture;
 	char *e_texture;
+	bool north;
+	bool south;
+	bool west;
+	bool east;
 	char *floor;
 	char *cieling;
 	char *map;
 }	t_map;
+
+void texture(t_map *map, char *line);
 
 #endif
