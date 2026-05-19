@@ -9,7 +9,7 @@ void init_map(t_map *map)
 	{
 		if(line[0] == 'N' && line[1] == 'O')
 		{
-			map->n_texture = ft_substr(line, 2, ft_strlen(line) - 2);
+			map->n_texture = ft_substr(line, 3, ft_strlen(line) - 2);
 			//if(!map->n_texture)
 				//free funct
 		}
@@ -20,7 +20,7 @@ int parsing()
 {
 	int i;
 	t_map *map;
-
+	map = malloc(sizeof(t_map));
 	init_map(map);
 	printf("%s", map->n_texture);
 	return 0;
@@ -30,4 +30,4 @@ int main()
 {
 	parsing();
 	return 0;
-}
+}	
