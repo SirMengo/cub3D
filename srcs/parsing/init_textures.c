@@ -27,4 +27,8 @@ int get_texture(t_map *map, char *line)
 		return (set_texture(map, &map->w_texture, &map->west, line));
 	if(!ft_strncmp(line, "EA", 2))
 		return (set_texture(map, &map->e_texture, &map->east, line));
+	if(!ft_strncmp(line, "C ", 2))
+		return (set_texture(map, &map->c_color, &map->ceiling, line));
+	if(!ft_strncmp(line, "F ", 2))
+		return (set_texture(map, &map->f_color, &map->floor, line));
 }

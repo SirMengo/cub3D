@@ -28,6 +28,6 @@ typedef struct s_map
 	char **map;
 }	t_map;
 
-int texture(t_map *map, char *line);
+int get_texture(t_map *map, char *line);
 
 #endif

@@ -4,22 +4,12 @@ int init_map(t_map *map)
 {
 	char *line;
 	int fd = open("file.txt", O_RDONLY);
-	map->north = false;
-	map->south = false;
-	map->south = false;
-	map->east = false;
-	map->ceiling = false;
-	map->floor = false;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		texture(map, line);
-		if(map->north && map->south && map->west && map->east)
-		{
-			printf("All textures");
+		get_texture(map, line);
+		if(map->north && map->south && map->west && map->east && map->floor, map->ceiling)
 			return 0;
-		}
 	}
-	printf("Missing textures");
 	return 1;
 }
 
@@ -27,7 +17,7 @@ int parsing()
 {
 	int i;
 	t_map *map;
-	map = malloc(sizeof(t_map));
+	map = ft_calloc(1, sizeof(t_map));
 	init_map(map);
 	return 0;
 }
