@@ -1,16 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msimoes <msimoes@student.42lisboa.com>     +#+  +:+       +#+         #
+#    By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/19 15:47:22 by msimoes           #+#    #+#              #
-#    Updated: 2026/05/19 15:48:11 by msimoes          ###   ########.fr        #
+#    Updated: 2026/05/20 12:40:16 by xalves           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = gnl.a
 
 SRC_FILES = get_next_line.c \
 			get_next_line_utils.c
