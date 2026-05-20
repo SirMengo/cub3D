@@ -8,6 +8,8 @@ int init_map(t_map *map)
 	map->south = false;
 	map->south = false;
 	map->east = false;
+	map->ceiling = false;
+	map->floor = false;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		texture(map, line);

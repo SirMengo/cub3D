@@ -2,44 +2,29 @@
 
 void free_textures(t_map *map)
 {
-	if(map->n_texture)
-		free(map->n_texture);
-	if(map->s_texture)
-		free(map->s_texture);
-	if(map->e_texture)
-		free(map->e_texture);
-	if(map->w_texture)
-		free(map->w_texture);
+	free(map->n_texture);
+	free(map->s_texture);
+	free(map->e_texture);
+	free(map->w_texture);
 }
 
-int texture(t_map *map, char *line)
+static int set_texture(t_map *map, char **dst, bool *flag, char *line)
 {
-	if(line[0] == 'N' && line[1] == 'O')
-	{
-		map->n_texture = ft_substr(line, 3, ft_strlen(line) - 2);
-		if(!map->n_texture)
-			return (free_textures(map), 1);
-		map->north = true;
-	}
-	if(line[0] == 'S' && line[1] == 'O')
-	{
-		map->s_texture = ft_substr(line, 3, ft_strlen(line) - 2);
-		if(!map->s_texture)
-			return (free_textures(map), 1);
-		map->south = true;
-	}
-	if(line[0] == 'W' && line[1] == 'E')
-	{
-		map->w_texture = ft_substr(line, 3, ft_strlen(line) - 2);
-		if(!map->w_texture)
-			return (free_textures(map), 1);
-		map->west = true;
-	}
-	if(line[0] == 'E' && line[1] == 'A')
-	{
-		map->e_texture = ft_substr(line, 3, ft_strlen(line) - 2);
-		if(!map->e_texture)
-			return (free_textures(map), 1);
-		map->east = true;
-	}
+	*dst = ft_substr(line, 3, ft_strlen(line) - 2);
+	if(!*dst)
+		return (free_textures(map), 1);
+	*flag = true;
+	return (0);
+}
+
+int get_texture(t_map *map, char *line)
+{
+	if(!ft_strncmp(line, "NO", 2))
+		return (set_texture(map, &map->n_texture, &map->north, line));
+	if(!ft_strncmp(line, "SO", 2))
+		return (set_texture(map, &map->s_texture, &map->south, line));
+	if(!ft_strncmp(line, "WE", 2))
+		return (set_texture(map, &map->w_texture, &map->west, line));
+	if(!ft_strncmp(line, "EA", 2))
+		return (set_texture(map, &map->e_texture, &map->east, line));
 }

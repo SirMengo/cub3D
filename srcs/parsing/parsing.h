@@ -10,19 +10,24 @@
 
 typedef struct s_map
 {
+	//Texture/Color information:
 	char *n_texture;
 	char *s_texture;
 	char *w_texture;
 	char *e_texture;
+	char *c_color;
+	char *f_color;
+	//Check if loaded:
 	bool north;
 	bool south;
 	bool west;
 	bool east;
-	char *floor;
-	char *cieling;
-	char *map;
+	bool ceiling;
+	bool floor;
+
+	char **map;
 }	t_map;
 
-void texture(t_map *map, char *line);
+int texture(t_map *map, char *line);
 
 #endif
