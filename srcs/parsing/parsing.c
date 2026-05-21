@@ -1,22 +1,52 @@
 #include "parsing.h"
 
+int has_content(char *line)
+{
+	int	i;
+
+	i = 0;
+	while(line[i])
+	{
+		if(line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int init_map(t_map *map)
 {
-	char *line;
-	int fd = open("file.txt", O_RDONLY);
+	char	*line;
+	int		fd ;
+
+	fd = open("file.txt", O_RDONLY);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		get_texture(map, line);
-		if(map->north && map->south && map->west && map->east && map->floor, map->ceiling)
-			return 0;
+		if(!has_content(line))
+		{
+			free(line);
+			continue ;
+		}
+		if(map->north && map->south && map->west && map->east && map->floor && map->ceiling)
+			copy_map(map, line);
+		else
+			get_texture(map, line);
+		free(line);
+	}
+	int i = 0;
+	while(map->map[i])
+	{
+		printf("%s\n", map->map[i]);
+		i++;
 	}
 	return 1;
 }
 
 int parsing()
 {
-	int i;
-	t_map *map;
+	int		i;
+	t_map	*map;
+
 	map = ft_calloc(1, sizeof(t_map));
 	init_map(map);
 	return 0;
@@ -26,4 +56,4 @@ int main()
 {
 	parsing();
 	return 0;
-}	
+}
