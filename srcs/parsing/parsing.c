@@ -34,9 +34,11 @@ int init_map(t_map *map)
 		free(line);
 	}
 	int i = 0;
+	normalize_map(map);
 	while(map->map[i])
 	{
-		printf("%s\n", map->map[i]);
+		printf("%s", map->map[i]);
+		printf("\\0\n");
 		i++;
 	}
 	return 1;

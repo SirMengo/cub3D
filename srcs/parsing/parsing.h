@@ -28,8 +28,9 @@ typedef struct s_map
 
 	char	**map;
 }	t_map;
-
+ 
 int get_texture(t_map *map, char *line);
 int copy_map(t_map *map, char *line);
+int normalize_map(t_map *map);
 
 #endif
