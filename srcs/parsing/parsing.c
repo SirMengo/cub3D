@@ -35,6 +35,7 @@ int init_map(t_map *map)
 	}
 	int i = 0;
 	normalize_map(map);
+	printf("%s\n", map->s_texture);
 	while(map->map[i])
 	{
 		printf("%s", map->map[i]);

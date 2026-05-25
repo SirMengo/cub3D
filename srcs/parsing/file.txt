@@ -1,5 +1,5 @@
 NO sprites/North1.xpm
-SO sprites/South1.xpm
+SO 		 	sprites/South1.xpm
 WE sprites/West1.xpm
 EA sprites/East1.xpm
 

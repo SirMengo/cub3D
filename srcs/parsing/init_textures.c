@@ -10,11 +10,21 @@ void free_textures(t_map *map)
 
 static int set_texture(t_map *map, char **dst, bool *flag, char *line)
 {
-	*dst = ft_substr(line, 3, ft_strlen(line) - 2);
-	if(!*dst)
+	unsigned int	start;
+	size_t			end;
+
+	start = 2;
+	while (line[start] == ' ' || line[start] == '\t')
+		start++;
+	end = ft_strlen(line);
+	while (end > start && (line[end - 1] == '\n' || line[end - 1] == ' ' || line[end - 1] == '\t'))
+		end--;
+	*dst = ft_substr(line, start, end - start);
+	if (!*dst)
 		return (free_textures(map), 1);
 	*flag = true;
-	return (0);
+		return (0);
+	
 }
 
 int get_texture(t_map *map, char *line)
