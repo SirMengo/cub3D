@@ -1,9 +1,11 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+//srcs/aux
 # include "../aux/get_next_line/get_next_line.h"
 # include "../aux/libft/libft.h"
 
+//includes
 # include <stdlib.h>
 # include <stdio.h>
 # include <curses.h>
@@ -18,9 +20,6 @@ typedef struct s_map
 	char	*c_color;
 	char	*f_color;
 
-	//Player init pov
-	char	*p_cardinal;
-
 	//Check if loaded:
 	bool	north;
 	bool	south;
@@ -29,7 +28,14 @@ typedef struct s_map
 	bool	ceiling;
 	bool	floor;
 
+	//Map
 	char	**map;
+
+	//Player init
+	char	*p_cardinal;
+	char	*x_pos;
+	char	*y_pos;
+
 }	t_map;
 
 //parsing.c
