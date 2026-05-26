@@ -18,6 +18,9 @@ typedef struct s_map
 	char	*c_color;
 	char	*f_color;
 
+	//Player init pov
+	char	*p_cardinal;
+
 	//Check if loaded:
 	bool	north;
 	bool	south;
@@ -28,9 +31,16 @@ typedef struct s_map
 
 	char	**map;
 }	t_map;
- 
+
+//parsing.c
+int parsing(t_map **map);
+//init_textures.c
 int get_texture(t_map *map, char *line);
-int copy_map(t_map *map, char *line);
+//init_map.c
+int init_map(t_map *map);
+//normalize_map.c
 int normalize_map(t_map *map);
+//cleanup.c
+void free_map(t_map *map);
 
 #endif

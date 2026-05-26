@@ -1,6 +1,6 @@
 #include "parsing.h"
 
-void replace_newline(char *line)
+static void replace_newline(char *line)
 {
 	size_t len;
 
@@ -9,7 +9,7 @@ void replace_newline(char *line)
 		line[len - 1] = '\0';
 }
 
-int copy_map(t_map *map, char *line)
+static int copy_map(t_map *map, char *line)
 {
 	int		row_count;
 	char	**temp_map;
@@ -36,4 +36,46 @@ int copy_map(t_map *map, char *line)
 	free(map->map);
 	map->map = temp_map;
 	return (0);
+}
+
+static int has_content(char *line)
+{
+	int	i;
+
+	i = 0;
+	while(line[i])
+	{
+		if(line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int init_map(t_map *map)
+{
+	char	*line;
+	int		fd;
+	int		ret;
+
+	if (access("file.txt", R_OK))
+		return (1);
+	fd = open("file.txt", O_RDONLY);
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		if (!has_content(line))
+		{
+			free(line);
+			continue ;
+		}
+		if (map->north && map->south && map->west && map->east && map->floor && map->ceiling)
+			ret = copy_map(map, line);
+		else
+			ret = get_texture(map, line);
+		free(line);
+	}
+	if(ret)
+		return (close(fd), 1);
+	close (fd);
+	return (normalize_map(map));
 }

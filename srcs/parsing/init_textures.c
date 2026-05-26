@@ -1,13 +1,5 @@
 #include "parsing.h"
 
-void free_textures(t_map *map)
-{
-	free(map->n_texture);
-	free(map->s_texture);
-	free(map->e_texture);
-	free(map->w_texture);
-}
-
 static int set_texture(t_map *map, char **dst, bool *flag, char *line)
 {
 	unsigned int	start;
@@ -21,9 +13,9 @@ static int set_texture(t_map *map, char **dst, bool *flag, char *line)
 		end--;
 	*dst = ft_substr(line, start, end - start);
 	if (!*dst)
-		return (free_textures(map), 1);
+		return (free_map(map), 1);
 	*flag = true;
-		return (0);
+	return (0);
 	
 }
 
@@ -41,4 +33,5 @@ int get_texture(t_map *map, char *line)
 		return (set_texture(map, &map->c_color, &map->ceiling, line));
 	if(!ft_strncmp(line, "F ", 2))
 		return (set_texture(map, &map->f_color, &map->floor, line));
+	return (1);
 }
