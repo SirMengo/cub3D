@@ -7,5 +7,6 @@ int parsing(t_map **map)
 		return (1);
 	if (init_map(*map))
 		return(free_map(*map), 1);
-	return 0;
+	
+	return (0);
 }

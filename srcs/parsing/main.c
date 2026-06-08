@@ -3,7 +3,8 @@
 int main()
 {
 	t_map	*map;
-	parsing(&map);
+	if(parsing(&map))
+		return (1);
 
 	printf("TESTES\n");
 	printf("TEXTURAS & CORES:\n");

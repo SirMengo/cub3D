@@ -1,5 +1,52 @@
 #include "parsing.h"
 
+static int parse_color_value(char *color, int *value, char **end)
+{
+	unsigned int	i;
+	size_t			len;
+	char			*aux;
+	
+	i = 0;
+	len = 0;
+	while(color[i] = ' ' || color[i] == '\t')
+		i++;
+	if(!ft_isdigit(color[i]))
+		return (1);
+	*value = 0;
+	while(ft_isdigit(color[i]))
+	{
+		*value = *value * 10 + (color[i] - '0');
+		if(*value > 255)
+			return (1);
+		i++;
+	}
+	while(color[i] = ' ' || color[i] == '\t')
+		i++;
+	return (0);
+}
+
+int check_color(char *color, int *r, int *g, int *b)
+{
+	char	*ptr;
+
+	ptr = color;
+	if (parse_color_value(ptr, r, &ptr))
+		return (1);
+	if (*ptr != ',')
+		return (1);
+	ptr++;
+	if (parse_color_value(ptr, g, &ptr))
+		return (1);
+	if (*ptr != ',')
+		return (1);
+	ptr++;
+	if (parse_color_value(ptr, b, &ptr))
+		return (1);
+	if (*ptr != '\0' && *ptr != '\n')
+		return (1);
+	return (0);
+}
+
 static int set_texture(t_map *map, char **dst, bool *flag, char *line)
 {
 	unsigned int	start;
