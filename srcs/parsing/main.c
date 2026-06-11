@@ -12,8 +12,9 @@ int main()
 	printf("SOUTH: %s\n", map->s_texture);
 	printf("EAST: %s\n", map->e_texture);
 	printf("WEST: %s\n", map->w_texture);
-	printf("FLOOR: %s\n", map->f_color);
-	printf("CIEILING: %s\n\n", map->c_color);
+	printf("RGB: %d %d %d\n", map->f_rgb[0], map->f_rgb[1], map->f_rgb[2]);
+	printf("FLOOR: #%s\n", map->hex_floor);
+	printf("CEILING: #%s\n", map->hex_cieling);
 
 	int i = 0;
 	printf("MAPA:\n");

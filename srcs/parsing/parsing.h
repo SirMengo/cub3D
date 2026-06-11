@@ -19,8 +19,10 @@ typedef struct s_map
 	char	*e_texture;
 	char	*c_color;
 	char	*f_color;
-	int		hex_cieling;
-	int		hex_floor;
+	int		c_rgb[3];
+	int		f_rgb[3];
+	char	*hex_cieling;
+	char	*hex_floor;
 
 	//Check if loaded:
 	bool	north;

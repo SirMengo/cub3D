@@ -9,6 +9,8 @@ void free_map(t_map *map)
 	free(map->w_texture);
 	free(map->c_color);
 	free(map->f_color);
+	free(map->hex_cieling);
+	free(map->hex_floor);
 	i = 0;
 	if(map->map)
 	{

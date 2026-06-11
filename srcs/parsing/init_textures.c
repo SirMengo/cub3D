@@ -1,48 +1,39 @@
 #include "parsing.h"
 
-static int parse_color_value(char *color, int *value, char **end)
+static int parse_color_value(char **color, int *value)
 {
-	unsigned int	i;
-	size_t			len;
-	char			*aux;
-	
-	i = 0;
-	len = 0;
-	while(color[i] = ' ' || color[i] == '\t')
-		i++;
-	if(!ft_isdigit(color[i]))
+	while (**color == ' ' || **color == '\t')
+		(*color)++;
+	if (!ft_isdigit(**color))
 		return (1);
 	*value = 0;
-	while(ft_isdigit(color[i]))
+	while (ft_isdigit(**color))
 	{
-		*value = *value * 10 + (color[i] - '0');
-		if(*value > 255)
+		*value = *value * 10 + (**color - '0');
+		if (*value > 255)
 			return (1);
-		i++;
+		(*color)++;
 	}
-	while(color[i] = ' ' || color[i] == '\t')
-		i++;
+	while (**color == ' ' || **color == '\t')
+		(*color)++;
 	return (0);
 }
 
-int check_color(char *color, int *r, int *g, int *b)
+int check_color(char *color, int rgb[3])
 {
-	char	*ptr;
-
-	ptr = color;
-	if (parse_color_value(ptr, r, &ptr))
+	if (parse_color_value(&color, &rgb[0]))
 		return (1);
-	if (*ptr != ',')
+	if (*color != ',')
 		return (1);
-	ptr++;
-	if (parse_color_value(ptr, g, &ptr))
+	color++;
+	if (parse_color_value(&color, &rgb[1]))
 		return (1);
-	if (*ptr != ',')
+	if (*color != ',')
 		return (1);
-	ptr++;
-	if (parse_color_value(ptr, b, &ptr))
+	color++;
+	if (parse_color_value(&color, &rgb[2]))
 		return (1);
-	if (*ptr != '\0' && *ptr != '\n')
+	if (*color != '\0' && *color != '\n')
 		return (1);
 	return (0);
 }
@@ -66,6 +57,26 @@ static int set_texture(t_map *map, char **dst, bool *flag, char *line)
 	
 }
 
+static char *rgb_to_hex(t_map *map, int rgb[3])
+{
+    char		*hex;
+	const char	*digits = "0123456789ABCDEF";
+	int			i;
+
+	hex = ft_calloc(7, sizeof(char));
+	if (!hex)
+		return (free_map(map), NULL);
+	i = 0;
+	while (i < 3)
+	{
+		hex[i * 2]     = digits[(rgb[i] >> 4) & 0xF];
+		hex[i * 2 + 1] = digits[rgb[i] & 0xF];
+		i++;
+	}
+	hex[6] = '\0';
+	return (hex);
+}
+
 int get_texture(t_map *map, char *line)
 {
 	if(!ft_strncmp(line, "NO", 2))
@@ -76,9 +87,11 @@ int get_texture(t_map *map, char *line)
 		return (set_texture(map, &map->w_texture, &map->west, line));
 	if(!ft_strncmp(line, "EA", 2))
 		return (set_texture(map, &map->e_texture, &map->east, line));
-	if(!ft_strncmp(line, "C ", 2))
-		return (set_texture(map, &map->c_color, &map->ceiling, line));
-	if(!ft_strncmp(line, "F ", 2))
-		return (set_texture(map, &map->f_color, &map->floor, line));
+	if (!ft_strncmp(line, "C ", 2) && !set_texture(map, &map->c_color, &map->ceiling, line)
+		&& !check_color(map->c_color, map->c_rgb))
+		return (!(map->hex_cieling = rgb_to_hex(map, map->c_rgb)));
+	if (!ft_strncmp(line, "F ", 2) && !set_texture(map, &map->f_color, &map->floor, line)
+		&& !check_color(map->f_color, map->f_rgb))
+		return (!(map->hex_floor = rgb_to_hex(map, map->f_rgb)));
 	return (1);
 }
