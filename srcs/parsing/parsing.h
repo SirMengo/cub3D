@@ -34,6 +34,7 @@ typedef struct s_map
 
 	//Map
 	char	**map;
+	int		row_count;
 
 	//Player init
 	char	*p_cardinal;
