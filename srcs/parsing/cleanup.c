@@ -1,5 +1,11 @@
 #include "parsing.h"
 
+int print_error(char *str)
+{
+	write(2, str, ft_strlen(str));
+	return (1);
+}
+
 void free_map(t_map *map)
 {
 	int	i;
@@ -11,6 +17,7 @@ void free_map(t_map *map)
 	free(map->f_color);
 	free(map->hex_cieling);
 	free(map->hex_floor);
+	free(map->file_name);
 	i = 0;
 	if(map->map)
 	{

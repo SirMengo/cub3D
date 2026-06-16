@@ -36,10 +36,10 @@ int check_map(t_map *map)
 			if (i == 0 || !map->map[i + 1])
 			{
 				if(map->map[i][j] != '1' && map->map[i][j] != ' ')
-					return (1);
+					return (print_error(MAP_SIDES));
 			}
 			else if(check_sides(map, i, j))
-				return (1);
+				return (print_error(MAP_SIDES));
 			j++;
 		}
 		i++;

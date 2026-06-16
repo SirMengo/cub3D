@@ -40,6 +40,7 @@ typedef struct s_map
 	char	*p_cardinal;
 	char	*x_pos;
 	char	*y_pos;
+	char	*file_name;
 
 }	t_map;
 
@@ -53,7 +54,17 @@ int init_map(t_map *map);
 int normalize_map(t_map *map);
 //cleanup.c
 void free_map(t_map *map);
+int print_error(char *str);
 //checl_map.c
 int check_map(t_map *map);
 
+//Error Messages
+#define ALMAP_ERR "ERROR:\n Map struct allocation failed!\n"
+#define ALFIL_ERR "ERROR:\n File name alocation failed!\n"
+#define EX_ERR "ERROR:\n Invalid map extension! Must be \".cub\".\n"
+#define FIL_EX "ERROR:\n File not existent or not readable.\n"
+#define MAP_SIDES "ERROR:\n Invalid map borders.\n"
+#define ST_MAPERR "ERROR:\n Map array alocation error.\n"
+#define INV_COLOR "ERROR:\n Invalid color.\n"
+#define NOR_ALLERR "ERROR:\n Failed alocation during map normalization.\n"
 #endif

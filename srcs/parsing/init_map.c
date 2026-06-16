@@ -20,7 +20,7 @@ static int copy_map(t_map *map, char *line)
 			map->row_count++;
 	temp_map = ft_calloc(map->row_count + 2, sizeof(char *));
 	if (!temp_map)
-		return (1);
+		return (print_error(ST_MAPERR));
 	i = 0;
 	while (i < map->row_count)
 	{
@@ -30,7 +30,7 @@ static int copy_map(t_map *map, char *line)
 	replace_newline(line);
 	temp_map[map->row_count] = ft_substr(line, 0, ft_strlen(line));
 	if(!temp_map[map->row_count])
-		return (free(temp_map), 1);
+		return (free(temp_map), print_error(ST_MAPERR));
 	temp_map[map->row_count + 1] = NULL;
 	free(map->map);
 	map->map = temp_map;
@@ -51,15 +51,25 @@ static int has_content(char *line)
 	return (0);
 }
 
+static int ret_check(char *line, int fd)
+{
+	while((line = get_next_line(fd)) != NULL)
+		free(line);
+	return (close(fd), 1);
+}
+
 int init_map(t_map *map)
 {
 	char	*line;
 	int		fd;
 	int		ret;
 
-	if (access("file2.txt", R_OK))
-		return (1);
-	fd = open("file2.txt", O_RDONLY);
+	if (access(map->file_name, R_OK))
+		return (print_error(FIL_EX));
+	fd = open(map->file_name, O_RDONLY);
+	if (fd < 0)
+		return (print_error(FIL_EX));
+	ret = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (!has_content(line))
@@ -72,9 +82,9 @@ int init_map(t_map *map)
 		else
 			ret = get_texture(map, line);
 		free(line);
+		if (ret)
+			return (ret_check(NULL, fd));
 	}
-	if(ret)
-		return (close(fd), 1);
 	close (fd);
 	return (normalize_map(map));
 }

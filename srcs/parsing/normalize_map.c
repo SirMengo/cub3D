@@ -36,7 +36,7 @@ int normalize_map(t_map *map)
 		{
 			normalize = ft_calloc(max + 1, sizeof(char));
 			if(!normalize)
-				return (1);
+				return (print_error(NOR_ALLERR));
 			ft_memcpy(normalize, map->map[i], row_len);
 			ft_memset(normalize + row_len, ' ', max - row_len);
 			normalize[max] = '\0';
