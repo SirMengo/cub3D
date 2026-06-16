@@ -5,6 +5,7 @@ SRC_FILES = check_map.c \
 			init_map.c \
 			init_textures.c \
 			normalize_map.c \
+			check_player.c \
 			parsing.c
 
 # $<  = pre-requesitos

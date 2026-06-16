@@ -20,26 +20,25 @@ static size_t get_max_width(char **map)
 
 int normalize_map(t_map *map)
 {
-	size_t	max;
-	size_t	row_len;
+	int		row_len;
 	char	*normalize;
 	int		i;
 
 	if(!map->map)
 		return (1);
-	max = get_max_width(map->map);
+	map->width = get_max_width(map->map);
 	i = 0;
 	while(map->map[i])
 	{
 		row_len = ft_strlen(map->map[i]);
-		if(row_len < max)
+		if(row_len < map->width)
 		{
-			normalize = ft_calloc(max + 1, sizeof(char));
+			normalize = ft_calloc(map->width + 1, sizeof(char));
 			if(!normalize)
 				return (print_error(NOR_ALLERR));
 			ft_memcpy(normalize, map->map[i], row_len);
-			ft_memset(normalize + row_len, ' ', max - row_len);
-			normalize[max] = '\0';
+			ft_memset(normalize + row_len, ' ', map->width - row_len);
+			normalize[map->width] = '\0';
 			free(map->map[i]);
 			map->map[i] = normalize;
 		}

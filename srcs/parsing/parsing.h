@@ -9,6 +9,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <curses.h>
+# include <stdbool.h>
 
 typedef struct s_map
 {
@@ -35,13 +36,15 @@ typedef struct s_map
 	//Map
 	char	**map;
 	int		row_count;
-
+	int		width;
+	
 	//Player init
-	char	*p_cardinal;
-	char	*x_pos;
-	char	*y_pos;
-	char	*file_name;
+	char	p_cardinal;
+	int		x_pos;
+	int		y_pos;
 
+	//File name
+	char	*file_name;
 }	t_map;
 
 //parsing.c
@@ -55,8 +58,10 @@ int normalize_map(t_map *map);
 //cleanup.c
 void free_map(t_map *map);
 int print_error(char *str);
-//checl_map.c
+//check_map.c
 int check_map(t_map *map);
+//check_player.c
+int check_player(t_map *map);
 
 //Error Messages
 #define ALMAP_ERR "ERROR:\n Map struct allocation failed!\n"
@@ -67,4 +72,5 @@ int check_map(t_map *map);
 #define ST_MAPERR "ERROR:\n Map array alocation error.\n"
 #define INV_COLOR "ERROR:\n Invalid color.\n"
 #define NOR_ALLERR "ERROR:\n Failed alocation during map normalization.\n"
+
 #endif
