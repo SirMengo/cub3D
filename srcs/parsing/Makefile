@@ -1,6 +1,7 @@
 NAME = parsing.a
 
-SRC_FILES = cleanup.c \
+SRC_FILES = check_map.c \
+			cleanup.c \
 			init_map.c \
 			init_textures.c \
 			normalize_map.c \

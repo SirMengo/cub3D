@@ -57,9 +57,9 @@ int init_map(t_map *map)
 	int		fd;
 	int		ret;
 
-	if (access("file.txt", R_OK))
+	if (access("file2.txt", R_OK))
 		return (1);
-	fd = open("file.txt", O_RDONLY);
+	fd = open("file2.txt", O_RDONLY);
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (!has_content(line))

@@ -53,5 +53,7 @@ int init_map(t_map *map);
 int normalize_map(t_map *map);
 //cleanup.c
 void free_map(t_map *map);
+//checl_map.c
+int check_map(t_map *map);
 
 #endif

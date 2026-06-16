@@ -7,7 +7,20 @@ static int is_whitespace(char c)
 	return (0);
 }
 
-static int check_sides()
+static int check_sides(t_map *map, int i, int j)
+{
+	if(map->map[i][j] != '0')
+		return (0);
+	if(j + 1 >= (int)ft_strlen(map->map[i]) || is_whitespace(map->map[i][j + 1]))
+		return(1);
+	if (j - 1 < 0 || is_whitespace(map->map[i][j - 1]))
+		return(1);
+	if (!map->map[i + 1] || is_whitespace(map->map[i + 1][j]))
+		return(1);
+	if (i - 1 < 0 || is_whitespace(map->map[i - 1][j]))
+		return(1);
+	return (0);
+}
 
 int check_map(t_map *map)
 {
@@ -20,14 +33,16 @@ int check_map(t_map *map)
 		j = 0;
 		while(map->map[i][j])
 		{
-			if(i == 0 || i == map->row_count)
-				if(map->map[i][j] != '1')
-					return (1);
-			else
+			if (i == 0 || !map->map[i + 1])
 			{
+				if(map->map[i][j] != '1' && map->map[i][j] != ' ')
+					return (1);
 			}
+			else if(check_sides(map, i, j))
+				return (1);
 			j++;
 		}
+		i++;
 	}
-
+	return (0);
 }
