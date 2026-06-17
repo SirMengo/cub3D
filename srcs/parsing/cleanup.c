@@ -9,6 +9,9 @@ int print_error(char *str)
 void free_map(t_map *map)
 {
 	int	i;
+	
+	if(!map)
+		return ;
 	free(map->n_texture);
 	free(map->s_texture);
 	free(map->e_texture);

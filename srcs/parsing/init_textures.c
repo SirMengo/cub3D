@@ -22,23 +22,23 @@ static int parse_color_value(char **color, int *value)
 int check_color(char *color, int rgb[3])
 {
 	if (parse_color_value(&color, &rgb[0]))
-		return (print_error(INV_COLOR));
+		return (1);
 	if (*color != ',')
 		return (print_error(INV_COLOR));
 	color++;
 	if (parse_color_value(&color, &rgb[1]))
-		return (print_error(INV_COLOR));
+		return (1);
 	if (*color != ',')
 		return (print_error(INV_COLOR));
 	color++;
 	if (parse_color_value(&color, &rgb[2]))
-		return (print_error(INV_COLOR));
+		return (1);
 	if (*color != '\0' && *color != '\n')
 		return (print_error(INV_COLOR));
 	return (0);
 }
 
-static int set_texture(char **dst, bool *flag, char *line)
+static int set_texture(char **dst, int *flag, char *line)
 {
 	unsigned int	start;
 	size_t			end;
@@ -52,7 +52,7 @@ static int set_texture(char **dst, bool *flag, char *line)
 	*dst = ft_substr(line, start, end - start);
 	if (!*dst)
 		return (print_error(ST_MAPERR));
-	*flag = true;
+	(*flag)++;
 	return (0);
 	
 }

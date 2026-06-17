@@ -26,12 +26,12 @@ typedef struct s_map
 	char	*hex_floor;
 
 	//Check if loaded:
-	bool	north;
-	bool	south;
-	bool	west;
-	bool	east;
-	bool	ceiling;
-	bool	floor;
+	int		north;
+	int		south;
+	int		west;
+	int		east;
+	int		ceiling;
+	int		floor;
 
 	//Map
 	char	**map;
@@ -72,5 +72,9 @@ int check_player(t_map *map);
 #define ST_MAPERR "ERROR:\n Map array alocation error.\n"
 #define INV_COLOR "ERROR:\n Invalid color.\n"
 #define NOR_ALLERR "ERROR:\n Failed alocation during map normalization.\n"
+#define DBL_TEXTUR "ERROR:\n Double texture found.\n"
+#define DBL_COLOR "ERROR:\n Double color found.\n"
+#define NO_TEXTUR "ERROR:\n Missing texture\n"
+#define NO_COLOR "ERROR:\n Missing color\n"
 
 #endif
