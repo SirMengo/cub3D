@@ -63,6 +63,7 @@ int init_map(t_map *map)
 	char	*line;
 	int		fd;
 	int		ret;
+	int		map_started;
 
 	if (access(map->file_name, R_OK))
 		return (print_error(FIL_EX));
@@ -70,21 +71,43 @@ int init_map(t_map *map)
 	if (fd < 0)
 		return (print_error(FIL_EX));
 	ret = 0;
+	map_started = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		if (!has_content(line))
+		replace_newline(line);
+
+		if (map_started)
 		{
-			free(line);
-			continue ;
-		}
-		if (map->north && map->south && map->west && map->east && map->floor && map->ceiling)
+			if (!is_valid_map_line(line))
+			{
+				free(line);
+				print_error(EXT_MAP);
+				return (ret_check(NULL, fd));
+			}
 			ret = copy_map(map, line);
+		}
 		else
-			ret = get_texture(map, line);
+		{
+			if (!has_content(line))
+			{
+				free(line);
+				continue;
+			}
+			if (map->north && map->south && map->west && map->east &&
+				map->floor && map->ceiling)
+			{
+				map_started = 1;
+				ret = copy_map(map, line);
+			}
+			else
+				ret = get_texture(map, line);
+		}
+
 		free(line);
 		if (ret)
 			return (ret_check(NULL, fd));
 	}
-	close (fd);
+
+	close(fd);
 	return (normalize_map(map));
 }

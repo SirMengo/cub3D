@@ -43,6 +43,8 @@ static int set_texture(char **dst, int *flag, char *line)
 	unsigned int	start;
 	size_t			end;
 
+	if(*flag > 0)
+		free(*dst);
 	start = 2;
 	while (line[start] == ' ' || line[start] == '\t')
 		start++;

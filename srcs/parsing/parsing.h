@@ -62,6 +62,8 @@ int print_error(char *str);
 int check_map(t_map *map);
 //check_player.c
 int check_player(t_map *map);
+//map_aux.c
+int is_valid_map_line(char *line);
 
 //Error Messages
 #define ALMAP_ERR "ERROR:\n Map struct allocation failed!\n"
@@ -74,7 +76,8 @@ int check_player(t_map *map);
 #define NOR_ALLERR "ERROR:\n Failed alocation during map normalization.\n"
 #define DBL_TEXTUR "ERROR:\n Double texture found.\n"
 #define DBL_COLOR "ERROR:\n Double color found.\n"
-#define NO_TEXTUR "ERROR:\n Missing texture\n"
-#define NO_COLOR "ERROR:\n Missing color\n"
+#define NO_TEXTUR "ERROR:\n Missing texture.\n"
+#define NO_COLOR "ERROR:\n Missing color.\n"
+#define EXT_MAP "ERROR:\n Extra content after map.\n"
 
 #endif
