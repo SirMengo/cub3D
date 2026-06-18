@@ -9,7 +9,7 @@ int	print_error(char *str)
 void	free_map(t_map *map)
 {
 	int	i;
-	
+
 	if (!map)
 		return ;
 	free(map->n_texture);
@@ -24,7 +24,7 @@ void	free_map(t_map *map)
 	i = 0;
 	if (map->map)
 	{
-		while(map->map[i])
+		while (map->map[i])
 			free(map->map[i++]);
 		free(map->map);
 	}
