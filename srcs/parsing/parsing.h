@@ -45,6 +45,8 @@ typedef struct s_map
 
 	//File name
 	char	*file_name;
+	int		fd;
+
 }	t_map;
 
 //parsing.c
@@ -64,6 +66,9 @@ int check_map(t_map *map);
 int check_player(t_map *map);
 //map_aux.c
 int is_valid_map_line(char *line);
+int ret_check(char *line, int fd);
+void replace_newline(char *line);
+int has_content(char *line);
 
 //Error Messages
 #define ALMAP_ERR "ERROR:\n Map struct allocation failed!\n"

@@ -1,14 +1,5 @@
 #include "parsing.h"
 
-static void replace_newline(char *line)
-{
-	size_t len;
-
-	len = ft_strlen(line);
-	if(len > 0 && line[len - 1] == '\n')
-		line[len - 1] = '\0';
-}
-
 static int copy_map(t_map *map, char *line)
 {
 	char	**temp_map;
@@ -37,77 +28,75 @@ static int copy_map(t_map *map, char *line)
 	return (0);
 }
 
-static int has_content(char *line)
+static int parse_header_line(t_map *map, char *line, int *map_started, int *ret)
 {
-	int	i;
-
-	i = 0;
-	while(line[i])
+	if (!has_content(line))
+		return (1);
+	if (map->north && map->south && map->west && map->east &&
+		map->floor && map->ceiling)
 	{
-		if(line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
-			return (1);
-		i++;
+		*map_started = 1;
+		*ret = copy_map(map, line);
+	}
+	else
+		*ret = get_texture(map, line);
+	return (0);
+}
+
+static int process_line(t_map *map, char *line, int *started, int *ended)
+{
+	int	ret;
+
+	if (*started)
+	{
+		if (!has_content(line))
+		{
+			*ended = 1;
+			return (free(line), 2);
+		}
+		if (*ended || !is_valid_map_line(line))
+			return (free(line), print_error(EXT_MAP));
+		ret = copy_map(map, line);
+	}
+	else if (parse_header_line(map, line, started, &ret))
+		return (free(line), 2);
+	free(line);
+	return (ret);
+}
+
+static int loop(t_map *map, int *started, int *ended)
+{
+	char	*line;
+	int		ret;
+
+	while ((line = get_next_line(map->fd)) != NULL)
+	{
+		replace_newline(line);
+		ret = process_line(map, line, started, ended);
+		if (ret == 2)
+			continue;
+		if (ret)
+			return (ret_check(NULL, map->fd));
 	}
 	return (0);
 }
 
-static int ret_check(char *line, int fd)
-{
-	while((line = get_next_line(fd)) != NULL)
-		free(line);
-	return (close(fd), 1);
-}
-
 int init_map(t_map *map)
 {
-	char	*line;
-	int		fd;
-	int		ret;
-	int		map_started;
+	int	map_started;
+	int	map_ended;
+	int	ret;
 
 	if (access(map->file_name, R_OK))
 		return (print_error(FIL_EX));
-	fd = open(map->file_name, O_RDONLY);
-	if (fd < 0)
+	map->fd = open(map->file_name, O_RDONLY);
+	if (map->fd < 0)
 		return (print_error(FIL_EX));
-	ret = 0;
 	map_started = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		replace_newline(line);
-
-		if (map_started)
-		{
-			if (!is_valid_map_line(line))
-			{
-				free(line);
-				print_error(EXT_MAP);
-				return (ret_check(NULL, fd));
-			}
-			ret = copy_map(map, line);
-		}
-		else
-		{
-			if (!has_content(line))
-			{
-				free(line);
-				continue;
-			}
-			if (map->north && map->south && map->west && map->east &&
-				map->floor && map->ceiling)
-			{
-				map_started = 1;
-				ret = copy_map(map, line);
-			}
-			else
-				ret = get_texture(map, line);
-		}
-
-		free(line);
-		if (ret)
-			return (ret_check(NULL, fd));
-	}
-
-	close(fd);
+	map_ended = 0;
+	ret = loop(map, &map_started, &map_ended);
+	if (ret)
+		return (1);
+	close(map->fd);
 	return (normalize_map(map));
 }

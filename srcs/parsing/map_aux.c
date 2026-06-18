@@ -19,3 +19,33 @@ int is_valid_map_line(char *line)
 	}
 	return (has_map_char);
 }
+
+int ret_check(char *line, int fd)
+{
+	while((line = get_next_line(fd)) != NULL)
+		free(line);
+	return (close(fd), 1);
+}
+
+void replace_newline(char *line)
+{
+	size_t len;
+
+	len = ft_strlen(line);
+	if(len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+}
+
+int has_content(char *line)
+{
+	int	i;
+
+	i = 0;
+	while(line[i])
+	{
+		if(line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
