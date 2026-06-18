@@ -3,9 +3,8 @@
 int main()
 {
 	t_map	*map;
-	if(parsing(&map))
+	if (parsing(&map))
 		return (1);
-
 	printf("TESTES\n");
 	printf("TEXTURAS & CORES:\n");
 	printf("NORTH: %s\n", map->n_texture);
@@ -19,10 +18,9 @@ int main()
 	printf("PLAYER X: %i\n", map->x_pos);
 	printf("PLAYER Y: %i\n", map->y_pos);
 	printf("PLAYER CARDINAL: %c\n", map->p_cardinal);
-
 	int i = 0;
 	printf("MAPA:\n");
-	while(map->map[i])
+	while (map->map[i])
 	{
 		printf("%s\\0\n", map->map[i]);
 		i++;

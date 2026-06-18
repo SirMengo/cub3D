@@ -1,16 +1,16 @@
 #include "parsing.h"
 
-int print_error(char *str)
+int	print_error(char *str)
 {
 	write(2, str, ft_strlen(str));
 	return (1);
 }
 
-void free_map(t_map *map)
+void	free_map(t_map *map)
 {
 	int	i;
 	
-	if(!map)
+	if (!map)
 		return ;
 	free(map->n_texture);
 	free(map->s_texture);
@@ -22,7 +22,7 @@ void free_map(t_map *map)
 	free(map->hex_floor);
 	free(map->file_name);
 	i = 0;
-	if(map->map)
+	if (map->map)
 	{
 		while(map->map[i])
 			free(map->map[i++]);

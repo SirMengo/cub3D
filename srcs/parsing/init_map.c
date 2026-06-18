@@ -1,13 +1,13 @@
 #include "parsing.h"
 
-static int copy_map(t_map *map, char *line)
+static int	copy_map(t_map *map, char *line)
 {
 	char	**temp_map;
 	int		i;
 
 	map->row_count = 0;
 	if (map->map)
-		while(map->map[map->row_count])
+		while (map->map[map->row_count])
 			map->row_count++;
 	temp_map = ft_calloc(map->row_count + 2, sizeof(char *));
 	if (!temp_map)
@@ -20,7 +20,7 @@ static int copy_map(t_map *map, char *line)
 	}
 	replace_newline(line);
 	temp_map[map->row_count] = ft_substr(line, 0, ft_strlen(line));
-	if(!temp_map[map->row_count])
+	if (!temp_map[map->row_count])
 		return (free(temp_map), print_error(ST_MAPERR));
 	temp_map[map->row_count + 1] = NULL;
 	free(map->map);
@@ -28,14 +28,14 @@ static int copy_map(t_map *map, char *line)
 	return (0);
 }
 
-static int parse_header_line(t_map *map, char *line, int *map_started, int *ret)
+static int	parse_header_line(t_map *map, char *line, int *map_s, int *ret)
 {
 	if (!has_content(line))
 		return (1);
-	if (map->north && map->south && map->west && map->east &&
-		map->floor && map->ceiling)
+	if (map->north && map->south && map->west && map->east
+		&& map->floor && map->ceiling)
 	{
-		*map_started = 1;
+		*map_s = 1;
 		*ret = copy_map(map, line);
 	}
 	else
@@ -43,7 +43,7 @@ static int parse_header_line(t_map *map, char *line, int *map_started, int *ret)
 	return (0);
 }
 
-static int process_line(t_map *map, char *line, int *started, int *ended)
+static int	process_line(t_map *map, char *line, int *started, int *ended)
 {
 	int	ret;
 
@@ -66,24 +66,27 @@ static int process_line(t_map *map, char *line, int *started, int *ended)
 	return (ret);
 }
 
-static int loop(t_map *map, int *started, int *ended)
+static int	loop(t_map *map, int *started, int *ended)
 {
 	char	*line;
 	int		ret;
 
-	while ((line = get_next_line(map->fd)) != NULL)
+	while (1)
 	{
+		line = get_next_line(map->fd);
+		if (!line)
+			break ;
 		replace_newline(line);
 		ret = process_line(map, line, started, ended);
 		if (ret == 2)
-			continue;
+			continue ;
 		if (ret)
 			return (ret_check(NULL, map->fd));
 	}
 	return (0);
 }
 
-int init_map(t_map *map)
+int	init_map(t_map *map)
 {
 	int	map_started;
 	int	map_ended;

@@ -1,26 +1,26 @@
 #include "parsing.h"
 
-static int check_cardinal(char c)
+static int	check_cardinal(char c)
 {
-	if(c == 'E')
+	if (c == 'E')
 		return (1);
-	if(c == 'W')
+	if (c == 'W')
 		return (1);
-	if(c == 'S')
+	if (c == 'S')
 		return (1);
-	if(c == 'N')
+	if (c == 'N')
 		return (1);
 	return (0);
 }
 
-static void set_vars(int y, int x, t_map *map, char c)
+static void	set_vars(int y, int x, t_map *map, char c)
 {
 	map->p_cardinal = c;
 	map->x_pos = x;
 	map->y_pos = y;
 }
 
-int check_player(t_map *map)
+int	check_player(t_map *map)
 {
 	int		x;
 	int		y;
@@ -28,14 +28,14 @@ int check_player(t_map *map)
 
 	y = 0;
 	flag = false;
-	while(map->map[y])
+	while (map->map[y])
 	{
 		x = 0;
-		while(map->map[y][x])
+		while (map->map[y][x])
 		{
-			if(check_cardinal(map->map[y][x]) && flag == true)
+			if (check_cardinal(map->map[y][x]) && flag == true)
 				return (print_error(MULT_PLR));
-			else if(check_cardinal(map->map[y][x]))
+			else if (check_cardinal(map->map[y][x]))
 			{
 				set_vars(y, x, map, map->map[y][x]);
 				flag = true;
@@ -44,7 +44,7 @@ int check_player(t_map *map)
 		}
 		y++;
 	}
-	if(!flag)
+	if (!flag)
 		return (print_error(NO_PLR));
 	return (0);
 }
