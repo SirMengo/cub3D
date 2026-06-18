@@ -15,6 +15,10 @@ int main()
 	printf("RGB: %d %d %d\n", map->f_rgb[0], map->f_rgb[1], map->f_rgb[2]);
 	printf("FLOOR: #%s\n", map->hex_floor);
 	printf("CEILING: #%s\n", map->hex_cieling);
+	printf("////////////////////////////////////////\n");
+	printf("PLAYER X: %i\n", map->x_pos);
+	printf("PLAYER Y: %i\n", map->y_pos);
+	printf("PLAYER CARDINAL: %c\n", map->p_cardinal);
 
 	int i = 0;
 	printf("MAPA:\n");

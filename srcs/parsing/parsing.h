@@ -85,5 +85,7 @@ int has_content(char *line);
 #define NO_COLOR "ERROR:\n Missing color.\n"
 #define EXT_MAP "ERROR:\n Extra content after map.\n"
 #define INV_CHAR "ERROR:\n Invalid character in map.\n"
+#define NO_PLR "ERROR:\n No player found in map.\n"
+#define MULT_PLR "ERROR:\n Multiple players found in map.\n"
 
 #endif

@@ -61,5 +61,7 @@ int parsing(t_map **map)
 		return (free_map(*map), 1);
 	if(check_map(*map))
 		return (free_map(*map), 1);
+	if(check_player(*map))
+		return (free_map(*map), 1);
 	return (0);
 }
