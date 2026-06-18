@@ -37,7 +37,7 @@ typedef struct s_map
 	char	**map;
 	int		row_count;
 	int		width;
-	
+
 	//Player init
 	char	p_cardinal;
 	int		x_pos;
@@ -46,46 +46,46 @@ typedef struct s_map
 	//File name
 	char	*file_name;
 	int		fd;
-
 }	t_map;
 
 //parsing.c
-int parsing(t_map **map);
+int		parsing(t_map **map);
 //init_textures.c
-int get_texture(t_map *map, char *line);
+int		get_texture(t_map *map, char *line);
 //init_map.c
-int init_map(t_map *map);
+int		init_map(t_map *map);
 //normalize_map.c
-int normalize_map(t_map *map);
+int		normalize_map(t_map *map);
 //cleanup.c
-void free_map(t_map *map);
-int print_error(char *str);
+void	free_map(t_map *map);
+int		print_error(char *str);
 //check_map.c
-int check_map(t_map *map);
+int		check_map(t_map *map);
 //check_player.c
-int check_player(t_map *map);
+int		check_player(t_map *map);
 //map_aux.c
-int is_valid_map_line(char *line);
-int ret_check(char *line, int fd);
-void replace_newline(char *line);
-int has_content(char *line);
+int		is_valid_map_line(char *line);
+int		ret_check(char *line, int fd);
+void	replace_newline(char *line);
+int		has_content(char *line);
 
 //Error Messages
-#define ALMAP_ERR "ERROR:\n Map struct allocation failed!\n"
-#define ALFIL_ERR "ERROR:\n File name alocation failed!\n"
-#define EX_ERR "ERROR:\n Invalid map extension! Must be \".cub\".\n"
-#define FIL_EX "ERROR:\n File not existent or not readable.\n"
-#define MAP_SIDES "ERROR:\n Invalid map borders.\n"
-#define ST_MAPERR "ERROR:\n Map array alocation error.\n"
-#define INV_COLOR "ERROR:\n Invalid color.\n"
-#define NOR_ALLERR "ERROR:\n Failed alocation during map normalization.\n"
-#define DBL_TEXTUR "ERROR:\n Double texture found.\n"
-#define DBL_COLOR "ERROR:\n Double color found.\n"
-#define NO_TEXTUR "ERROR:\n Missing texture.\n"
-#define NO_COLOR "ERROR:\n Missing color.\n"
-#define EXT_MAP "ERROR:\n Extra content after map.\n"
-#define INV_CHAR "ERROR:\n Invalid character in map.\n"
-#define NO_PLR "ERROR:\n No player found in map.\n"
-#define MULT_PLR "ERROR:\n Multiple players found in map.\n"
+# define ALMAP_ERR "ERROR:\n Map struct allocation failed!\n"
+# define ALFIL_ERR "ERROR:\n File name alocation failed!\n"
+# define EX_ERR "ERROR:\n Invalid map extension! Must be \".cub\".\n"
+# define FIL_EX "ERROR:\n File not existent or not readable.\n"
+# define FIL_NAME "ERROR:\n File name or extension invalid.\n"
+# define MAP_SIDES "ERROR:\n Invalid map borders.\n"
+# define ST_MAPERR "ERROR:\n Map array alocation error.\n"
+# define INV_COLOR "ERROR:\n Invalid color.\n"
+# define NOR_ALLERR "ERROR:\n Failed alocation during map normalization.\n"
+# define DBL_TEXTUR "ERROR:\n Double texture found.\n"
+# define DBL_COLOR "ERROR:\n Double color found.\n"
+# define NO_TEXTUR "ERROR:\n Missing texture.\n"
+# define NO_COLOR "ERROR:\n Missing color.\n"
+# define EXT_MAP "ERROR:\n Extra content after map.\n"
+# define INV_CHAR "ERROR:\n Invalid character in map.\n"
+# define NO_PLR "ERROR:\n No player found in map.\n"
+# define MULT_PLR "ERROR:\n Multiple players found in map.\n"
 
 #endif

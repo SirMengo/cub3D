@@ -89,8 +89,6 @@ int init_map(t_map *map)
 	int	map_ended;
 	int	ret;
 
-	if (access(map->file_name, R_OK))
-		return (print_error(FIL_EX));
 	map->fd = open(map->file_name, O_RDONLY);
 	if (map->fd < 0)
 		return (print_error(FIL_EX));
