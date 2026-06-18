@@ -54,8 +54,10 @@ static int process_line(t_map *map, char *line, int *started, int *ended)
 			*ended = 1;
 			return (free(line), 2);
 		}
-		if (*ended || !is_valid_map_line(line))
+		if (*ended)
 			return (free(line), print_error(EXT_MAP));
+		if (!is_valid_map_line(line))
+			return (free(line), print_error(INV_CHAR));
 		ret = copy_map(map, line);
 	}
 	else if (parse_header_line(map, line, started, &ret))

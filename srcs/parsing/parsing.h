@@ -84,5 +84,6 @@ int has_content(char *line);
 #define NO_TEXTUR "ERROR:\n Missing texture.\n"
 #define NO_COLOR "ERROR:\n Missing color.\n"
 #define EXT_MAP "ERROR:\n Extra content after map.\n"
+#define INV_CHAR "ERROR:\n Invalid character in map.\n"
 
 #endif
