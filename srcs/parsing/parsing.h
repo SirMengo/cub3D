@@ -65,7 +65,7 @@ int		check_map(t_map *map);
 int		check_player(t_map *map);
 //map_aux.c
 int		is_valid_map_line(char *line);
-int		ret_check(char *line, int fd);
+int		ret_check(int fd);
 void	replace_newline(char *line);
 int		has_content(char *line);
 

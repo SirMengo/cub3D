@@ -81,7 +81,7 @@ static int	loop(t_map *map, int *started, int *ended)
 		if (ret == 2)
 			continue ;
 		if (ret)
-			return (ret_check(NULL, map->fd));
+			return (ret_check(map->fd));
 	}
 	return (0);
 }
