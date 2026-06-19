@@ -105,5 +105,5 @@ int	get_texture(t_map *map, char *line)
 		free(map->hex_floor);
 		return (!(map->hex_floor = rgb_to_hex(map->f_rgb)));
 	}
-	return (1);
+	return (print_error(INV_IDENT));
 }

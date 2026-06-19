@@ -75,7 +75,7 @@ int		has_content(char *line);
 # define EX_ERR "ERROR:\n Invalid map extension! Must be \".cub\".\n"
 # define FIL_EX "ERROR:\n File not existent or not readable.\n"
 # define FIL_NAME "ERROR:\n File name or extension invalid.\n"
-# define MAP_SIDES "ERROR:\n Invalid map borders.\n"
+# define MAP_SIDES "ERROR:\n Open tile touching the void.\n"
 # define ST_MAPERR "ERROR:\n Map array alocation error.\n"
 # define INV_COLOR "ERROR:\n Invalid color.\n"
 # define NOR_ALLERR "ERROR:\n Failed alocation during map normalization.\n"
@@ -88,5 +88,6 @@ int		has_content(char *line);
 # define NO_PLR "ERROR:\n No player found in map.\n"
 # define MULT_PLR "ERROR:\n Multiple players found in map.\n"
 # define NO_MAP "ERROR:\n No map found in file.\n"
+# define INV_IDENT "ERROR:\n Invalid texture/color identifier.\n"
 
 #endif

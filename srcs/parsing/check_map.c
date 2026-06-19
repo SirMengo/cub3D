@@ -7,9 +7,16 @@ static int	is_whitespace(char c)
 	return (0);
 }
 
+static int	is_open_tile(char c)
+{
+	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
 static int	check_sides(t_map *map, int i, int j)
 {
-	if (map->map[i][j] != '0')
+	if (!is_open_tile(map->map[i][j]))
 		return (0);
 	if (j + 1 >= (int)ft_strlen(map->map[i])
 		|| is_whitespace(map->map[i][j + 1]))
