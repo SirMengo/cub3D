@@ -87,5 +87,6 @@ int		has_content(char *line);
 # define INV_CHAR "ERROR:\n Invalid character in map.\n"
 # define NO_PLR "ERROR:\n No player found in map.\n"
 # define MULT_PLR "ERROR:\n Multiple players found in map.\n"
+# define NO_MAP "ERROR:\n No map found in file.\n"
 
 #endif

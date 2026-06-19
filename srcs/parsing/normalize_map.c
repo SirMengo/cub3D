@@ -25,7 +25,7 @@ int	normalize_map(t_map *map)
 	int		i;
 
 	if (!map->map)
-		return (1);
+		return (print_error(NO_MAP));
 	map->width = get_max_width(map->map);
 	i = 0;
 	while (map->map[i])

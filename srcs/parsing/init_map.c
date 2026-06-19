@@ -32,8 +32,8 @@ static int	parse_header_line(t_map *map, char *line, int *map_s, int *ret)
 {
 	if (!has_content(line))
 		return (1);
-	if (map->north && map->south && map->west && map->east
-		&& map->floor && map->ceiling)
+	if ((map->north && map->south && map->west && map->east
+		&& map->floor && map->ceiling) || is_valid_map_line(line))
 	{
 		*map_s = 1;
 		*ret = copy_map(map, line);

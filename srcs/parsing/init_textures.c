@@ -88,14 +88,22 @@ int	get_texture(t_map *map, char *line)
 	if (!ft_strncmp(line, "WE", 2))
 		return (set_texture(&map->w_texture, &map->west, line));
 	if (!ft_strncmp(line, "EA", 2))
+	{
 		return (set_texture(&map->e_texture, &map->east, line));
+	}
 	if (!ft_strncmp(line, "C ", 2)
 		&& !set_texture(&map->c_color, &map->ceiling, line)
 		&& !check_color(map->c_color, map->c_rgb))
+	{
+		free(map->hex_cieling);
 		return (!(map->hex_cieling = rgb_to_hex(map->c_rgb)));
+	}
 	if (!ft_strncmp(line, "F ", 2)
 		&& !set_texture(&map->f_color, &map->floor, line)
 		&& !check_color(map->f_color, map->f_rgb))
+	{
+		free(map->hex_floor);
 		return (!(map->hex_floor = rgb_to_hex(map->f_rgb)));
+	}
 	return (1);
 }
