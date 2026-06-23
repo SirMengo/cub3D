@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:14:41 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/05 17:04:32 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/23 12:44:24 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	detect_player(char pos)
 
 void	draw_player(t_game *game)
 {
-	draw_square(&game->img, game->player.plyr_x, game->player.plyr_y, 9, 0xFD5CCD);
+	draw_square(&game->img, game->player.x, game->player.y, 9, 0xFD5CCD);
 }
 
 //+28 just to center the player on the floor
@@ -44,8 +44,8 @@ void	set_player_pos(t_game *game, int x, int y)
 {
 	if (game->first_pos_set == 1)
 	{
-		game->player.plyr_x = (x * 64) + 28;
-		game->player.plyr_y = (y * 64) + 28;
+		game->player.x = (x * BLOCK) + 28;
+		game->player.y = (y * BLOCK) + 28;
 		game->first_pos_set = 0;
 	}
 }
@@ -63,12 +63,15 @@ void	render_map(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '1')
-				draw_square(&game->img, x * 64, y * 64, 63, 0x7F7F7F);
+				draw_square(&game->img, x * BLOCK, y * BLOCK, \
+BLOCK - 1, 0x7F7F7F);
 			if (game->map[y][x] == '0')
-				draw_square(&game->img, x * 64, y * 64, 63, 0xFFFFFF);
+				draw_square(&game->img, x * BLOCK, y * BLOCK, \
+BLOCK - 1, 0xFFFFFF);
 			if (detect_player(game->map[y][x]))
 			{
-				draw_square(&game->img, x * 64, y * 64, 63, 0xFFFFFF);
+				draw_square(&game->img, x * BLOCK, y * BLOCK, \
+BLOCK - 1, 0xFFFFFF);
 			}
 			x++;
 		}

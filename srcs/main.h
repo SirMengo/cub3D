@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/11 11:39:11 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/23 12:27:11 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,34 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include "aux/libft/libft.h"
 # include <stdio.h>
 # include <mlx.h>
 # include <stdlib.h>
 # include <math.h>
+# define WIDTH 1280 // # define WIDTH 1920
+# define HEIGHT 720  //# define HEIGHT 1080
+# define BLOCK 64
 # define PI 3.14159265359
 # define PLAYER_SPEED 5
 # define CAM_SENS 0.1
+# define FOV 90
+# define MINIMAP_BLOCK 10
+
+/* typedef struct s_ray
+{
+	int		r;//ray
+	int		map_x;
+	int		map_y;
+	int		map_point;
+	int		dof;//dept of field
+	float	ray_x;
+	float	ray_y;
+	float	ray_angl;
+	float	x_ofset;
+	float	y_ofset;
+	float	invtan;//Invert of Tangent(TAN)
+}	t_ray; */
 
 typedef struct s_img
 {
@@ -35,12 +56,12 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	float	plyr_x;
-	float	plyr_y;
+	float	x;
+	float	y;
 	float	plyr_dx;
 	float	plyr_dy;
-	float	plyr_angle;
-	char	plyr_orientation;
+	float	angle;
+	char	orientation;
 }	t_player;
 
 typedef struct s_game
@@ -51,6 +72,8 @@ typedef struct s_game
 	t_player	player;
 	int			first_pos_set;
 	char		**map;
+	int			map_x;
+	int			map_y;
 }	t_game;
 
 //main.c

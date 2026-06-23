@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:03:32 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/08 14:26:58 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/17 14:38:25 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	draw_pixel(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 
-	if (x < 0 || x >= 1280 || y < 0 || y >= 720)
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 	{
 		return ;
 	}
@@ -33,8 +33,8 @@ void	draw_direction_line(t_game *game, int length, int width, int color)
 	i = 0;
 	while (i < length)
 	{
-		x = (game->player.plyr_x + 4) + game->player.plyr_dx / PLAYER_SPEED * i;
-		y = (game->player.plyr_y + 4) + game->player.plyr_dy / PLAYER_SPEED * i;
+		x = (game->player.x + 4) + game->player.plyr_dx / PLAYER_SPEED * i;
+		y = (game->player.y + 4) + game->player.plyr_dy / PLAYER_SPEED * i;
 		draw_square(&game->img, (int)x - width / 2, (int)y - width / 2, \
 width, color);
 		i++;
