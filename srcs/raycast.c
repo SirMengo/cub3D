@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:31 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/23 12:43:04 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/24 18:21:47 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,25 @@ void render_3d(t_game *game, float dist, int i)
 		start_y = 0;
 	if (end > HEIGHT)
 		end = HEIGHT;
+	//celing
+	y = 0;
+	while (y < start_y)
+	{
+		draw_pixel(&game->img, i, y, 0x00FFFF);
+		y++;
+	}
+	//wall
 	y = start_y;
 	while (y < end)
 	{
 		draw_pixel(&game->img, i, y, 0x228B22);
+		y++;
+	}
+	//floor
+	y = end;
+	while (y < HEIGHT)
+	{
+		draw_pixel(&game->img, i, y, 0x8B4513);
 		y++;
 	}
 }

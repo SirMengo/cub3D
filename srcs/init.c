@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:32:27 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/18 15:03:37 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/24 17:55:21 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,18 @@ char	**get_map_test(void)
 game->first_pos_set = 1; // 1 true, 0 false
 */
 
+void	init_textures(t_game *game)
+{
+	game->n_texture = "srcs/textures/north.xpm";
+	game->s_texture = "srcs/textures/south.xpm";
+	game->e_texture = "srcs/textures/east.xpm";
+	game->w_texture = "srcs/textures/west.xpm";
+	generate_img_ptr(game, &game->wall_north, game->n_texture);
+	generate_img_ptr(game, &game->wall_south, game->s_texture);
+	generate_img_ptr(game, &game->wall_east, game->e_texture);
+	generate_img_ptr(game, &game->wall_west, game->w_texture);
+}
+
 /// @brief Initiates the game, player & image variables
 /// @param game 
 void	init_game(t_game *game)
@@ -89,6 +101,7 @@ void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D");
 	game->map = get_map_test();
+	init_textures(game);
 	init_player(game);
 	init_img(&game->img, game->mlx);
 }

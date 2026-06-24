@@ -6,7 +6,7 @@
 #    By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/20 15:13:03 by xalves            #+#    #+#              #
-#    Updated: 2026/06/05 17:04:04 by xalves           ###   ########.fr        #
+#    Updated: 2026/06/24 16:58:07 by xalves           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ GNL_LIB = $(AUX_DIR)/get_next_line/gnl.a
 LIBFT_LIB = $(AUX_DIR)/libft/libft.a
 
 # SOURCE FILES
-SRC_FILES = main.c inputs.c init.c draw_funcs.c collisions.c raycast.c
+SRC_FILES = main.c inputs.c init.c draw_funcs.c collisions.c raycast.c textures.c
 
 # SOURCES
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/23 12:27:11 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/24 16:53:28 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,8 @@
 # define PLAYER_SPEED 5
 # define CAM_SENS 0.1
 # define FOV 90
+# define SPRITE_SIZE 64
 # define MINIMAP_BLOCK 10
-
-/* typedef struct s_ray
-{
-	int		r;//ray
-	int		map_x;
-	int		map_y;
-	int		map_point;
-	int		dof;//dept of field
-	float	ray_x;
-	float	ray_y;
-	float	ray_angl;
-	float	x_ofset;
-	float	y_ofset;
-	float	invtan;//Invert of Tangent(TAN)
-}	t_ray; */
 
 typedef struct s_img
 {
@@ -74,6 +60,14 @@ typedef struct s_game
 	char		**map;
 	int			map_x;
 	int			map_y;
+	char		*n_texture;
+	char		*s_texture;
+	char		*e_texture;
+	char		*w_texture;
+	t_img		wall_north;
+	t_img		wall_south;
+	t_img		wall_east;
+	t_img		wall_west;
 }	t_game;
 
 //main.c
@@ -97,5 +91,8 @@ int		is_wall(t_game *game, float px, float py);
 
 //raycast.c
 void	raycast(t_game *game);
+
+//textures.c
+void	generate_img_ptr(t_game *game, t_img *texture, char *xpm_path);
 
 #endif
