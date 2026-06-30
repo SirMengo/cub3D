@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:14:41 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/23 12:44:24 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/30 12:08:49 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	set_player_pos(t_game *game, int x, int y)
 {
 	if (game->first_pos_set == 1)
 	{
-		game->player.x = (x * BLOCK) + 28;
-		game->player.y = (y * BLOCK) + 28;
+		game->player.x = (x * BLOCK) + 32;
+		game->player.y = (y * BLOCK) + 32;
 		game->first_pos_set = 0;
 	}
 }
@@ -79,7 +79,7 @@ BLOCK - 1, 0xFFFFFF);
 	}
 }
 
-int	render(t_game *game)
+int	render_loop(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->img.img);
 	init_img(&game->img, game->mlx);

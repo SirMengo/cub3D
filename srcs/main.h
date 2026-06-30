@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/24 16:53:28 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/30 12:06:13 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_game
 }	t_game;
 
 //main.c
-int		render(t_game *game);
+int		render_loop(t_game *game);
 int		detect_player(char pos);
 
 //init.c
@@ -91,8 +91,17 @@ int		is_wall(t_game *game, float px, float py);
 
 //raycast.c
 void	raycast(t_game *game);
+void	render_3d(t_game *game, float dist, int i, t_img *tex, \
+float ray_x, float ray_y);//textures.c
 
-//textures.c
+//texture.c
 void	generate_img_ptr(t_game *game, t_img *texture, char *xpm_path);
+int		get_texture_pixel_color(t_img *texture, int x, int y);
+t_img	*get_wall_texture(t_game *game, float ray_x, float ray_y);
+
+//math_funcs.c
+float	normalize_angle(float angle);
+float	degrees_to_radians(int degrees);
+float	distance(float x, float y);
 
 #endif

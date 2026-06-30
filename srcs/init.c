@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:32:27 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/24 17:55:21 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/29 15:08:07 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,13 @@ void	init_textures(t_game *game)
 	game->e_texture = "srcs/textures/east.xpm";
 	game->w_texture = "srcs/textures/west.xpm";
 	generate_img_ptr(game, &game->wall_north, game->n_texture);
+	printf("\nnorth texture addr: %p\n", game->wall_north.addr);
 	generate_img_ptr(game, &game->wall_south, game->s_texture);
+	printf("\nsouth texture addr: %p\n", game->wall_south.addr);
 	generate_img_ptr(game, &game->wall_east, game->e_texture);
+	printf("\neast texture addr: %p\n", game->wall_east.addr);
 	generate_img_ptr(game, &game->wall_west, game->w_texture);
+	printf("\nwest texture addr: %p\n", game->wall_west.addr);
 }
 
 /// @brief Initiates the game, player & image variables

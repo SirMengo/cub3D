@@ -6,25 +6,11 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:31 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/24 18:21:47 by xalves           ###   ########.fr       */
+/*   Updated: 2026/06/30 11:44:58 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-float	normalize_angle(float angle)
-{
-	while (angle < 0)
-		angle += 2 * PI;
-	while (angle >= 2 * PI)
-		angle -= 2 * PI;
-	return (angle);
-}
-
-float	degrees_to_radians(int degrees)
-{
-	return (degrees * PI / 180);
-}
 
 int	ray_hitting_wall(float px, float py, t_game *game)
 {
@@ -40,41 +26,41 @@ int	ray_hitting_wall(float px, float py, t_game *game)
 	return (0);
 }
 
-float	distance(float x, float y)
+void	render_3d(t_game *game, float dist, int i, t_img *tex, float ray_x, float ray_y)
 {
-	return (sqrt(x * x + y * y));
-}
-
-void render_3d(t_game *game, float dist, int i)
-{
-	float	height;
-	int		start_y;
+	float	h;
+	int		start;
 	int		end;
+	int		tx;
 	int		y;
+	int		ty;
+	int		color;
 
-	height = (BLOCK / dist) * (HEIGHT / 2);
-	start_y = (HEIGHT - height) / 2;
-	end = start_y + height;
-	if (start_y < 0)
-		start_y = 0;
-	if (end > HEIGHT)
-		end = HEIGHT;
-	//celing
+	h = (BLOCK / dist) * (HEIGHT);
+	start = (HEIGHT - h) / 2;
+	end = start + h;
+	if (tex == &game->wall_west || tex == &game->wall_east)
+		tx = ((int)ray_y % 64 + 64) % 64;
+	else
+		tx = ((int)ray_x % 64 + 64) % 64;
+	// Flip west and south textures
+	if (tex == &game->wall_west || tex == &game->wall_south)
+		tx = 63 - tx;
 	y = 0;
-	while (y < start_y)
+	while (y < start)
 	{
 		draw_pixel(&game->img, i, y, 0x00FFFF);
 		y++;
 	}
-	//wall
-	y = start_y;
-	while (y < end)
+	while (y < end && y < HEIGHT)
 	{
-		draw_pixel(&game->img, i, y, 0x228B22);
+		ty = ((y - start) * 64) / (int)h;
+		if (ty > 64)
+			ty = 64;
+		color = get_texture_pixel_color(tex, tx, ty);
+		draw_pixel(&game->img, i, y, color);
 		y++;
 	}
-	//floor
-	y = end;
 	while (y < HEIGHT)
 	{
 		draw_pixel(&game->img, i, y, 0x8B4513);
@@ -82,47 +68,39 @@ void render_3d(t_game *game, float dist, int i)
 	}
 }
 
-void	fan_raycast(t_game *game, float current_angle, float fov_rad)
+void	fan_raycast(t_game *game, float angle, float fov)
 {
-	float	ray_x;
-	float	ray_y;
-	float	cos_angle;
-	float	sin_angle;
-	float	swept;
+	float	rx;
+	float	ry;
+	float	cx;
+	float	cy;
 	float	dist;
 	int		i;
 
-	swept = 0;
 	i = 0;
-	while (swept < fov_rad)
+	while (i < WIDTH)
 	{
-		ray_x = game->player.x;
-		ray_y = game->player.y;
-		cos_angle = cos(current_angle);
-		sin_angle = sin(current_angle);
-		while (!ray_hitting_wall(ray_x, ray_y, game))
+		rx = game->player.x;
+		ry = game->player.y;
+		cx = cos(angle);
+		cy = sin(angle);
+		while (!ray_hitting_wall(rx, ry, game))
 		{
-			draw_pixel(&game->img, ray_x, ray_y, 0x4F7942);
-			ray_x += cos_angle;
-			ray_y += sin_angle;
+			rx += cx;
+			ry += cy;
 		}
-		dist = distance(ray_x - game->player.x, ray_y - game->player.y);
-		dist = dist * cos(current_angle - game->player.angle); // fisheye fix
-		render_3d(game, dist, i);
-		current_angle = normalize_angle(current_angle + (fov_rad / WIDTH));
-		swept += (fov_rad / WIDTH);
+		dist = distance(rx - game->player.x, ry - game->player.y);
+		dist = dist * cos(angle - game->player.angle);
+		render_3d(game, dist, i, get_wall_texture(game, rx, ry), rx, ry);
+		angle = normalize_angle(angle + (fov / WIDTH));
 		i++;
 	}
 }
 
-
-
 void	raycast(t_game *game)
 {
-	float	fov_rad;
-	float	start_angle;
+	float	fov;
 
-	fov_rad = degrees_to_radians(FOV);
-	start_angle = normalize_angle(game->player.angle - (fov_rad / 2));
-	fan_raycast(game, start_angle, fov_rad);
+	fov = degrees_to_radians(FOV);
+	fan_raycast(game, normalize_angle(game->player.angle - (fov / 2)), fov);
 }
