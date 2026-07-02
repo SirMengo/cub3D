@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 12:03:32 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/17 14:38:25 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/02 02:36:23 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_pixel(t_img *img, int x, int y, int color)
 	*(unsigned int *)pixel = color;
 }
 
-void	draw_direction_line(t_game *game, int length, int width, int color)
+/* void	draw_direction_line(t_game *game, int length, int width, int color)
 {
 	float	x;
 	float	y;
@@ -35,19 +35,13 @@ void	draw_direction_line(t_game *game, int length, int width, int color)
 	{
 		x = (game->player.x + 4) + game->player.plyr_dx / PLAYER_SPEED * i;
 		y = (game->player.y + 4) + game->player.plyr_dy / PLAYER_SPEED * i;
-		draw_square(&game->img, (int)x - width / 2, (int)y - width / 2, \
+		draw_square(&game->img, (int)x 
+		- width / 2, (int)y - width / 2, \
 width, color);
 		i++;
 	}
 }
 
-/// @brief draw square in (sx,sy) with size and color
-/// @param img image
-/// @param sx starting position on x axis
-/// @param sy starting position on y axis
-/// @param size square size/dimention
-/// @param color color of square
-// (!!! Number of args problem might get resolved with singletons !!!)
 void	draw_square(t_img *img, int sx, int sy, int size, int color)
 {
 	int	x;
@@ -64,4 +58,4 @@ void	draw_square(t_img *img, int sx, int sy, int size, int color)
 		}
 		y++;
 	}
-}
+} */

@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_funcs.c                                       :+:      :+:    :+:   */
+/*   todelete.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/30 11:42:53 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/30 15:54:36 by xalves           ###   ########.fr       */
+/*   Created: 2026/07/02 02:46:06 by xalves            #+#    #+#             */
+/*   Updated: 2026/07/02 02:47:27 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-float	normalize_angle(float angle)
+/// @brief funtion only for testing(delete later)
+/// @param  
+/// @return gives a test map
+char	**get_map_test(void)
 {
-	while (angle < 0)
-		angle += 2 * PI;
-	while (angle >= 2 * PI)
-		angle -= 2 * PI;
-	return (angle);
-}
+	static char	*map[] = {
+		"111111111111",
+		"100001000101",
+		"100000010001",
+		"100001000101",
+		"100000010001",
+		"10N000111111",
+		"100000000001",
+		"111111111111",
+		"1 1 1 1     ",
+		"1  1 1 1    ",
+		"111111111111",
+		NULL
+	};
 
-float	degrees_to_radians(int degrees)
-{
-	return (degrees * PI / 180);
-}
-
-float	distance(float x, float y)
-{
-	return (sqrt(x * x + y * y));
+	return (map);
 }

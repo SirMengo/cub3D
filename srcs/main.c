@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:14:41 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/30 12:08:49 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/02 02:32:05 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ game.mlx = mlx_init();
 mlx_get_screen_size(game.mlx, &screen_w, &screen_h);
 game.win = mlx_new_window(game.mlx, screen_w, screen_h, "Cub3D");
 */
+
+int	print_error(char *str)
+{
+	write(2, str, ft_strlen(str));
+	return (1);
+}
+
 int	detect_player(char pos)
 {
 	if (pos == 'N')
@@ -34,12 +41,12 @@ int	detect_player(char pos)
 	return (0);
 }
 
-void	draw_player(t_game *game)
+/* void	draw_player(t_game *game)
 {
 	draw_square(&game->img, game->player.x, game->player.y, 9, 0xFD5CCD);
-}
+} */
 
-//+28 just to center the player on the floor
+//+32 just to center the player on the floor
 void	set_player_pos(t_game *game, int x, int y)
 {
 	if (game->first_pos_set == 1)
@@ -50,41 +57,12 @@ void	set_player_pos(t_game *game, int x, int y)
 	}
 }
 
-//draw floor and set player starting position
-void	render_map(t_game *game)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == '1')
-				draw_square(&game->img, x * BLOCK, y * BLOCK, \
-BLOCK - 1, 0x7F7F7F);
-			if (game->map[y][x] == '0')
-				draw_square(&game->img, x * BLOCK, y * BLOCK, \
-BLOCK - 1, 0xFFFFFF);
-			if (detect_player(game->map[y][x]))
-			{
-				draw_square(&game->img, x * BLOCK, y * BLOCK, \
-BLOCK - 1, 0xFFFFFF);
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
+//render_map(game);
+//draw_player(game);
 int	render_loop(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->img.img);
 	init_img(&game->img, game->mlx);
-	render_map(game);
-	draw_player(game);
 	raycast(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);

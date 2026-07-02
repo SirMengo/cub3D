@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:31 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/30 11:44:58 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/02 00:41:42 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,72 +26,61 @@ int	ray_hitting_wall(float px, float py, t_game *game)
 	return (0);
 }
 
-void	render_3d(t_game *game, float dist, int i, t_img *tex, float ray_x, float ray_y)
+void	render_3d(t_game *game, float dist, int i, t_img *tex)
 {
 	float	h;
 	int		start;
-	int		end;
-	int		tx;
 	int		y;
 	int		ty;
-	int		color;
 
 	h = (BLOCK / dist) * (HEIGHT);
 	start = (HEIGHT - h) / 2;
-	end = start + h;
-	if (tex == &game->wall_west || tex == &game->wall_east)
-		tx = ((int)ray_y % 64 + 64) % 64;
-	else
-		tx = ((int)ray_x % 64 + 64) % 64;
-	// Flip west and south textures
-	if (tex == &game->wall_west || tex == &game->wall_south)
-		tx = 63 - tx;
 	y = 0;
 	while (y < start)
-	{
-		draw_pixel(&game->img, i, y, 0x00FFFF);
-		y++;
-	}
-	while (y < end && y < HEIGHT)
+		draw_pixel(&game->img, i, y++, 0x00FFFF);
+	while (y < start + h && y < HEIGHT)
 	{
 		ty = ((y - start) * 64) / (int)h;
-		if (ty > 64)
-			ty = 64;
-		color = get_texture_pixel_color(tex, tx, ty);
-		draw_pixel(&game->img, i, y, color);
-		y++;
+		if (ty >= 64)
+			ty = 63;
+		draw_pixel(&game->img, i, y++,
+			get_texture_pixel_color(tex, game->tex_x, ty));
 	}
 	while (y < HEIGHT)
+		draw_pixel(&game->img, i, y++, 0x8B4513);
+}
+
+void	cast_single_ray(t_game *game, float angle, int i)
+{
+	float	cx;
+	float	cy;
+	float	dist;
+	t_img	*tex;
+
+	game->ray_x = game->player.x;
+	game->ray_y = game->player.y;
+	cx = cos(angle);
+	cy = sin(angle);
+	while (!ray_hitting_wall(game->ray_x, game->ray_y, game))
 	{
-		draw_pixel(&game->img, i, y, 0x8B4513);
-		y++;
+		game->ray_x += cx;
+		game->ray_y += cy;
 	}
+	dist = distance(game->ray_x - game->player.x, game->ray_y - game->player.y);
+	dist = dist * cos(angle - game->player.angle);
+	tex = get_wall_texture(game, game->ray_x, game->ray_y);
+	set_texture_x(game, tex, game->ray_x, game->ray_y);
+	render_3d(game, dist, i, tex);
 }
 
 void	fan_raycast(t_game *game, float angle, float fov)
 {
-	float	rx;
-	float	ry;
-	float	cx;
-	float	cy;
-	float	dist;
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < WIDTH)
 	{
-		rx = game->player.x;
-		ry = game->player.y;
-		cx = cos(angle);
-		cy = sin(angle);
-		while (!ray_hitting_wall(rx, ry, game))
-		{
-			rx += cx;
-			ry += cy;
-		}
-		dist = distance(rx - game->player.x, ry - game->player.y);
-		dist = dist * cos(angle - game->player.angle);
-		render_3d(game, dist, i, get_wall_texture(game, rx, ry), rx, ry);
+		cast_single_ray(game, angle, i);
 		angle = normalize_angle(angle + (fov / WIDTH));
 		i++;
 	}

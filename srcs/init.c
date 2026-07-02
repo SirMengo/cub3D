@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:32:27 by xalves            #+#    #+#             */
-/*   Updated: 2026/06/29 15:08:07 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/02 02:47:46 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,44 +44,15 @@ void	find_player_start_pos(t_game *game)
 	}
 }
 
-/// @brief Initiates all the player variables
-/// @param game 
-///in case change -sin back to normal
+// need to modify game->player.angle so it's automatic
 void	init_player(t_game *game)
 {
 	find_player_start_pos(game);
-	game->player.angle = (3* PI) / 2; // need to modify so it's automatic
+	game->player.angle = (3 * PI) / 2;
 	game->player.orientation = 'N';
 }
 
-/// @brief funtion only for testing(delete later)
-/// @param  
-/// @return gives a test map
-char	**get_map_test(void)
-{
-	static char	*map[] = {
-		"111111111111",
-		"100001000101",
-		"100000010001",
-		"100001000101",
-		"100000010001",
-		"10N000111111",
-		"100000000001",
-		"111111111111",
-		"1 1 1 1     ",
-		"1  1 1 1    ",
-		"111111111111",
-		NULL
-	};
-
-	return (map);
-}
-
-/*
-1280, 720 = 720p
-game->first_pos_set = 1; // 1 true, 0 false
-*/
-
+//need to transform into an int function so i can return 1 if error
 void	init_textures(t_game *game)
 {
 	game->n_texture = "srcs/textures/north.xpm";
