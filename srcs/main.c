@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:14:41 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/02 02:32:05 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/07 13:38:34 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ int	main(void)
 {
 	t_game	game;
 
-	init_game(&game);
+	if (init_game(&game) == 1 )
+	{
+		cleanup(&game);
+		return (1);
+	}
 	input_check(&game);
 	mlx_loop(game.mlx);
 	return (0);

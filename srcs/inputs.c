@@ -6,19 +6,27 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:03:50 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/02 03:13:46 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/07 14:37:58 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
+void	check_and_destroy_img(void	*mlx, void	*img)
+{
+	if (img)
+	{
+		mlx_destroy_image(mlx, img);
+	}
+}
+
 void	cleanup(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->img.img);
-	mlx_destroy_image(game->mlx, game->wall_north.img);
-	mlx_destroy_image(game->mlx, game->wall_south.img);
-	mlx_destroy_image(game->mlx, game->wall_east.img);
-	mlx_destroy_image(game->mlx, game->wall_west.img);
+	check_and_destroy_img(game->mlx, game->img.img);
+	check_and_destroy_img(game->mlx, game->wall_north.img);
+	check_and_destroy_img(game->mlx, game->wall_south.img);
+	check_and_destroy_img(game->mlx, game->wall_east.img);
+	check_and_destroy_img(game->mlx, game->wall_west.img);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);

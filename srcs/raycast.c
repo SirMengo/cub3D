@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:31 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/02 00:41:42 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/07 12:02:31 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ int	ray_hitting_wall(float px, float py, t_game *game)
 
 void	render_3d(t_game *game, float dist, int i, t_img *tex)
 {
+	float	multiplier;
 	float	h;
 	int		start;
 	int		y;
 	int		ty;
 
-	h = (BLOCK / dist) * (HEIGHT);
+	multiplier = (WIDTH / 2) / tan(degrees_to_radians(FOV / 2));
+	h = (BLOCK / dist) * multiplier;
 	start = (HEIGHT - h) / 2;
 	y = 0;
 	while (y < start)
@@ -43,8 +45,8 @@ void	render_3d(t_game *game, float dist, int i, t_img *tex)
 		ty = ((y - start) * 64) / (int)h;
 		if (ty >= 64)
 			ty = 63;
-		draw_pixel(&game->img, i, y++,
-			get_texture_pixel_color(tex, game->tex_x, ty));
+		draw_pixel(&game->img, i, y++, \
+get_texture_pixel_color(tex, game->tex_x, ty));
 	}
 	while (y < HEIGHT)
 		draw_pixel(&game->img, i, y++, 0x8B4513);

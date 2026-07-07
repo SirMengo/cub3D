@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/02 03:07:06 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/07 14:31:30 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define PI 3.14159265359
 # define PLAYER_SPEED 5
 # define CAM_SENS 0.1
-# define FOV 90
+# define FOV 60
 # define SPRITE_SIZE 64
 # define MINIMAP_BLOCK 10
 
@@ -38,6 +38,7 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		loaded;
 }	t_img;
 
 typedef struct s_player
@@ -79,11 +80,12 @@ int		detect_player(char pos);
 int		print_error(char *str);
 
 //init.c
-void	init_game(t_game *game);
+int		init_game(t_game *game);
 void	init_img(t_img *img, void *mlx);
 
 //inputs.c
 void	input_check(t_game *game);
+void	cleanup(t_game *game);
 
 //draw_funcs.c
 void	draw_pixel(t_img *img, int x, int y, int color);
@@ -98,7 +100,7 @@ void	raycast(t_game *game);
 void	render_3d(t_game *game, float dist, int i, t_img *tex);
 
 //texture.c
-void	generate_img_ptr(t_game *game, t_img *texture, char *xpm_path);
+int		generate_img_ptr(t_game *game, t_img *texture, char *xpm_path);
 int		get_texture_pixel_color(t_img *texture, int x, int y);
 t_img	*get_wall_texture(t_game *game, float ray_x, float ray_y);
 void	set_texture_x(t_game *game, t_img *tex, float rx, float ry);

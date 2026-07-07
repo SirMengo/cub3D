@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:32:27 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/02 02:47:46 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/07 14:48:46 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,44 @@ void	init_player(t_game *game)
 }
 
 //need to transform into an int function so i can return 1 if error
-void	init_textures(t_game *game)
+int	init_textures(t_game *game)
 {
-	game->n_texture = "srcs/textures/north.xpm";
+	game->wall_north.img = NULL;
+	game->wall_south.img = NULL;
+	game->wall_east.img = NULL;
+	game->wall_west.img = NULL;
+	game->img.img = NULL;
+	game->n_texture = "srcs/textures/nort.xpm";
 	game->s_texture = "srcs/textures/south.xpm";
 	game->e_texture = "srcs/textures/east.xpm";
 	game->w_texture = "srcs/textures/west.xpm";
-	generate_img_ptr(game, &game->wall_north, game->n_texture);
+	if (generate_img_ptr(game, &game->wall_north, game->n_texture) == 1)
+		return (1);
 	printf("\nnorth texture addr: %p\n", game->wall_north.addr);
-	generate_img_ptr(game, &game->wall_south, game->s_texture);
+	if (generate_img_ptr(game, &game->wall_south, game->s_texture) == 1)
+		return (1);
 	printf("\nsouth texture addr: %p\n", game->wall_south.addr);
-	generate_img_ptr(game, &game->wall_east, game->e_texture);
+	if (generate_img_ptr(game, &game->wall_east, game->e_texture) == 1)
+		return (1);
 	printf("\neast texture addr: %p\n", game->wall_east.addr);
-	generate_img_ptr(game, &game->wall_west, game->w_texture);
+	if (generate_img_ptr(game, &game->wall_west, game->w_texture) == 1)
+		return (1);
 	printf("\nwest texture addr: %p\n", game->wall_west.addr);
+	return (0);
 }
 
 /// @brief Initiates the game, player & image variables
 /// @param game 
-void	init_game(t_game *game)
+int	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D");
 	game->map = get_map_test();
-	init_textures(game);
 	init_player(game);
+	if (init_textures(game) == 1)
+	{
+		return (1);
+	}
 	init_img(&game->img, game->mlx);
+	return (0);
 }
