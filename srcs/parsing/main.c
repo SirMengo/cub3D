@@ -1,6 +1,6 @@
 #include "parsing.c"
 
-int main()
+/* int main()
 {
 	t_map	*map;
 	if (parsing(&map))
@@ -27,4 +27,4 @@ int main()
 	}
 	free_map(map);
 	return 0;
-}
+} */

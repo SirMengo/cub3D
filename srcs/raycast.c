@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:31 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/07 12:02:31 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/13 17:14:11 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	ray_hitting_wall(float px, float py, t_game *game)
 	return (0);
 }
 
+int	hex_to_int(const char *hex)
+{
+	return ((int)strtol(hex, NULL, 0));
+}
+
 void	render_3d(t_game *game, float dist, int i, t_img *tex)
 {
 	float	multiplier;
@@ -39,7 +44,7 @@ void	render_3d(t_game *game, float dist, int i, t_img *tex)
 	start = (HEIGHT - h) / 2;
 	y = 0;
 	while (y < start)
-		draw_pixel(&game->img, i, y++, 0x00FFFF);
+		draw_pixel(&game->img, i, y++, hex_to_int(game->hex_cieling));//0x00FFFF
 	while (y < start + h && y < HEIGHT)
 	{
 		ty = ((y - start) * 64) / (int)h;
@@ -49,7 +54,7 @@ void	render_3d(t_game *game, float dist, int i, t_img *tex)
 get_texture_pixel_color(tex, game->tex_x, ty));
 	}
 	while (y < HEIGHT)
-		draw_pixel(&game->img, i, y++, 0x8B4513);
+		draw_pixel(&game->img, i, y++, hex_to_int(game->hex_floor));//0x8B4513
 }
 
 void	cast_single_ray(t_game *game, float angle, int i)

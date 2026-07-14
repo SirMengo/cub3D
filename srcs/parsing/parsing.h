@@ -8,7 +8,7 @@
 //includes
 # include <stdlib.h>
 # include <stdio.h>
-# include <curses.h>
+//# include <curses.h>
 # include <stdbool.h>
 
 typedef struct s_map

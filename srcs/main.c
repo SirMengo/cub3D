@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:14:41 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/07 13:38:34 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/13 17:34:47 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ game.mlx = mlx_init();
 mlx_get_screen_size(game.mlx, &screen_w, &screen_h);
 game.win = mlx_new_window(game.mlx, screen_w, screen_h, "Cub3D");
 */
-
-int	print_error(char *str)
-{
-	write(2, str, ft_strlen(str));
-	return (1);
-}
 
 int	detect_player(char pos)
 {
@@ -71,8 +65,11 @@ int	render_loop(t_game *game)
 int	main(void)
 {
 	t_game	game;
+	t_map	*pars;
 
-	if (init_game(&game) == 1 )
+	if (parsing(&pars))
+		return (1);
+	if (init_game(&game, pars) == 1)
 	{
 		cleanup(&game);
 		return (1);

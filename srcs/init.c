@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:32:27 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/07 14:48:46 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/13 17:13:15 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,49 +21,54 @@ void	init_img(t_img *img, void *mlx)
 
 /// @brief finds and inits players starting position
 /// @param game (might change, depends on what i recieve from parse)
-void	find_player_start_pos(t_game *game)
+float	player_start_angle(t_map *pars)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (game->map[y])
+	if (pars->p_cardinal == 'N')
 	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (detect_player(game->map[y][x]))
-			{
-				game->player.x = (x * 64) + 28;
-				game->player.y = (y * 64) + 28;
-				return ;
-			}
-			x++;
-		}
-		y++;
+		return ((3 * PI) / 2);
 	}
+	if (pars->p_cardinal == 'S')
+	{
+		return (PI / 2);
+	}
+	if (pars->p_cardinal == 'E')
+	{
+		return (0);
+	}
+	if (pars->p_cardinal == 'W')
+	{
+		return (PI);
+	}
+	return (0);
 }
 
 // need to modify game->player.angle so it's automatic
-void	init_player(t_game *game)
+void	init_player(t_player *player, t_map *pars)
 {
-	find_player_start_pos(game);
-	game->player.angle = (3 * PI) / 2;
-	game->player.orientation = 'N';
+	player->x = pars->x_pos;
+	player->y = pars->y_pos;
+	player->angle = player_start_angle(pars);
+	player->orientation = pars->p_cardinal;
 }
 
+/* game->n_texture = "srcs/textures/nort.xpm";
+	game->s_texture = "srcs/textures/south.xpm";
+	game->e_texture = "srcs/textures/east.xpm";
+	game->w_texture = "srcs/textures/west.xpm"; */
 //need to transform into an int function so i can return 1 if error
-int	init_textures(t_game *game)
+int	init_textures(t_game *game, t_map *pars)
 {
 	game->wall_north.img = NULL;
 	game->wall_south.img = NULL;
 	game->wall_east.img = NULL;
 	game->wall_west.img = NULL;
 	game->img.img = NULL;
-	game->n_texture = "srcs/textures/nort.xpm";
-	game->s_texture = "srcs/textures/south.xpm";
-	game->e_texture = "srcs/textures/east.xpm";
-	game->w_texture = "srcs/textures/west.xpm";
+	game->n_texture = pars->n_texture;
+	game->s_texture = pars->s_texture;
+	game->e_texture = pars->e_texture;
+	game->w_texture = pars->w_texture;
+	game->hex_cieling = pars->hex_cieling;
+	game->hex_floor = pars->hex_floor;
 	if (generate_img_ptr(game, &game->wall_north, game->n_texture) == 1)
 		return (1);
 	printf("\nnorth texture addr: %p\n", game->wall_north.addr);
@@ -81,13 +86,13 @@ int	init_textures(t_game *game)
 
 /// @brief Initiates the game, player & image variables
 /// @param game 
-int	init_game(t_game *game)
+int	init_game(t_game *game, t_map *pars)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D");
-	game->map = get_map_test();
-	init_player(game);
-	if (init_textures(game) == 1)
+	game->map = pars->map;
+	init_player(&game->player, pars);
+	if (init_textures(game, pars) == 1)
 	{
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/07 14:31:30 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/13 17:34:57 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include "parsing/parsing.h"
 # include "aux/libft/libft.h"
 # include <stdio.h>
 # include <mlx.h>
@@ -70,6 +71,8 @@ typedef struct s_game
 	t_img		wall_south;
 	t_img		wall_east;
 	t_img		wall_west;
+	char		*hex_cieling;
+	char		*hex_floor;
 	float		ray_x;
 	float		ray_y;
 }	t_game;
@@ -77,10 +80,10 @@ typedef struct s_game
 //main.c
 int		render_loop(t_game *game);
 int		detect_player(char pos);
-int		print_error(char *str);
+//int		print_error(char *str);
 
 //init.c
-int		init_game(t_game *game);
+int		init_game(t_game *game, t_map *pars);
 void	init_img(t_img *img, void *mlx);
 
 //inputs.c
