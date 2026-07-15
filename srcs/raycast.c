@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:31 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/13 17:14:11 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/15 12:52:07 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,25 @@ int	ray_hitting_wall(float px, float py, t_game *game)
 
 int	hex_to_int(const char *hex)
 {
-	return ((int)strtol(hex, NULL, 0));
+	int	result;
+	int	value;
+
+	result = 0;
+	while (*hex)
+	{
+		if (*hex >= '0' && *hex <= '9')
+			value = *hex - '0';
+		else if (*hex >= 'A' && *hex <= 'F')
+			value = *hex - 'A' + 10;
+		else if (*hex >= 'a' && *hex <= 'f')
+			value = *hex - 'a' + 10;
+		else
+			return (-1); // invalid character
+
+		result = result * 16 + value;
+		hex++;
+	}
+	return (result);
 }
 
 void	render_3d(t_game *game, float dist, int i, t_img *tex)
@@ -88,7 +106,7 @@ void	fan_raycast(t_game *game, float angle, float fov)
 	while (i < WIDTH)
 	{
 		cast_single_ray(game, angle, i);
-		angle = normalize_angle(angle + (fov / WIDTH));
+		angle = normalize_angle(angle + (fov / (WIDTH)));
 		i++;
 	}
 }

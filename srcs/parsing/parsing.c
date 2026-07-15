@@ -49,12 +49,12 @@ static int	check_number_textures(t_map *map)
 	return (0);
 }
 
-int	parsing(t_map **map)
+int	parsing(t_map **map, char *filename)
 {
 	*map = ft_calloc(1, sizeof(t_map));
 	if (!*map)
 		return (free_map(*map), print_error(ALMAP_ERR));
-	(*map)->file_name = ft_strdup("a.cub");
+	(*map)->file_name = ft_strdup(filename);
 	if (!(*map)->file_name)
 		return (free_map(*map), print_error(ALFIL_ERR));
 	if (check_filename(*map))

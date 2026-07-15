@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:32:27 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/13 17:13:15 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/14 12:16:48 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,21 @@ float	player_start_angle(t_map *pars)
 	return (0);
 }
 
-// need to modify game->player.angle so it's automatic
+/* 
+void	init_player(t_game *game, t_map *pars)
+{
+	game.player->x = pars->x_pos;
+	game.player->y = pars->y_pos;
+	set_player_pos(game, pars->x_pos, pars->y_pos);
+	game->player.angle = player_start_angle(pars);
+	game->player.orientation = pars->p_cardinal;
+} 
+*/
+
 void	init_player(t_player *player, t_map *pars)
 {
-	player->x = pars->x_pos;
-	player->y = pars->y_pos;
+	player->x = (pars->x_pos * BLOCK) + 32;
+	player->y = (pars->y_pos * BLOCK) + 32;
 	player->angle = player_start_angle(pars);
 	player->orientation = pars->p_cardinal;
 }
@@ -81,6 +91,8 @@ int	init_textures(t_game *game, t_map *pars)
 	if (generate_img_ptr(game, &game->wall_west, game->w_texture) == 1)
 		return (1);
 	printf("\nwest texture addr: %p\n", game->wall_west.addr);
+	printf("\nfloor color: %s\n", game->hex_floor);
+	printf("\ncieling color: %s\n", game->hex_cieling);
 	return (0);
 }
 

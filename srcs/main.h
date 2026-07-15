@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/13 17:34:57 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/15 12:53:22 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define PI 3.14159265359
 # define PLAYER_SPEED 5
 # define CAM_SENS 0.1
-# define FOV 60
+# define FOV 50
 # define SPRITE_SIZE 64
 # define MINIMAP_BLOCK 10
 
@@ -80,6 +80,7 @@ typedef struct s_game
 //main.c
 int		render_loop(t_game *game);
 int		detect_player(char pos);
+void	set_player_pos(t_game *game, int x, int y);
 //int		print_error(char *str);
 
 //init.c

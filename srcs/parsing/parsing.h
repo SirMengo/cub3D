@@ -49,7 +49,7 @@ typedef struct s_map
 }	t_map;
 
 //parsing.c
-int		parsing(t_map **map);
+int		parsing(t_map **map, char *filename);
 //init_textures.c
 int		get_texture(t_map *map, char *line);
 //init_map.c

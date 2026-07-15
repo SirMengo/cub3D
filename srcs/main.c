@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:14:41 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/13 17:34:47 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/14 11:51:02 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,14 @@ int	render_loop(t_game *game)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game	game;
 	t_map	*pars;
 
-	if (parsing(&pars))
+	if(argc != 2)
+		return (1);
+	if (parsing(&pars, argv[1]))
 		return (1);
 	if (init_game(&game, pars) == 1)
 	{
