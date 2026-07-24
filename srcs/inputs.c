@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:03:50 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/14 11:57:59 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/24 11:41:15 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	cleanup(t_game *game)
 	check_and_destroy_img(game->mlx, game->wall_west.img);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
+	free_map(game->pars);
 	free(game->mlx);
 }
 
@@ -48,9 +49,6 @@ int	key_press(int key, t_game *game)
 	return (0);
 }
 
-//printf("\nplayer x = %f\nplayer y = %f", game->player.x, game->player.y);
-//mlx_hook(game->win, KeyPress, KeyPressMask, key_press, game);
-//mlx_hook(game->win, KeyRelease, KeyReleaseMask, key_release, game);
 void	input_check(t_game *game)
 {
 	mlx_hook(game->win, KeyPress, KeyPressMask, key_press, game);

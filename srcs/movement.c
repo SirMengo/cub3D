@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 11:51:43 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/02 03:08:30 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/24 11:52:18 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	move_player(t_game *game, float x_aux, float y_aux)
 	}
 }
 
-//need to see if i can just pass player instead of game !!!
 void	player_movement(int key, t_game *game)
 {
 	float	x_aux;

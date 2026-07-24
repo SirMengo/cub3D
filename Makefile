@@ -6,7 +6,7 @@
 #    By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/20 15:13:03 by xalves            #+#    #+#              #
-#    Updated: 2026/07/14 11:31:01 by xalves           ###   ########.fr        #
+#    Updated: 2026/07/24 11:54:43 by xalves           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ LIBFT_LIB = $(AUX_DIR)/libft/libft.a
 PARSING_LIB = $(PARSING_DIR)/parsing.a
 
 # SOURCE FILES
-SRC_FILES = main.c inputs.c init.c draw_funcs.c collisions.c raycast.c textures.c math_funcs.c movement.c todelete.c
+SRC_FILES = main.c inputs.c init.c draw_funcs.c raycast.c textures.c math_funcs.c movement.c
 
 # SOURCES
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

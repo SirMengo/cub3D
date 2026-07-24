@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 11:52:27 by xalves            #+#    #+#             */
-/*   Updated: 2026/05/26 14:12:51 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/22 19:23:25 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <string.h>
-#include <limits.h>
+# include <limits.h>
 
 int		ft_isalpha(int c);
 

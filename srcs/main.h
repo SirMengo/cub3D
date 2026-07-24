@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/15 12:53:22 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/22 19:04:45 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_game
 	void		*win;
 	t_img		img;
 	t_player	player;
+	t_map		*pars;
 	int			first_pos_set;
 	char		**map;
 	int			map_x;
@@ -113,6 +114,7 @@ void	set_texture_x(t_game *game, t_img *tex, float rx, float ry);
 float	normalize_angle(float angle);
 float	degrees_to_radians(int degrees);
 float	distance(float x, float y);
+int		hex_to_int(const char *hex);
 
 //movement.c
 void	player_movement(int key, t_game *game);

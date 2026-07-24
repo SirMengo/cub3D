@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xalves <xalves@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:38:12 by xalves            #+#    #+#             */
-/*   Updated: 2025/05/14 12:39:53 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/22 19:23:58 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	s1_len = ft_strlen((char *)s1);
 	s2_len = ft_strlen((char *)s2);
-	new_str = ft_calloc(s1_len + s2_len + 1, sizeof(char)); // calloc instead of malloc
+	new_str = ft_calloc(s1_len + s2_len + 1, sizeof(char));
 	if (!new_str)
 		return (NULL);
 	i = 0;

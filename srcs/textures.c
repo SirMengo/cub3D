@@ -6,13 +6,12 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 12:33:40 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/07 14:36:17 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/24 11:52:33 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-//printf("Error\n On loading texture: %s\n", xpm_path);
 int	generate_img_ptr(t_game *game, t_img *texture, char *xpm_path)
 {
 	int	size;

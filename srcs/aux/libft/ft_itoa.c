@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xalves <xalves@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 10:29:37 by xalves            #+#    #+#             */
-/*   Updated: 2025/04/30 10:27:26 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/22 19:25:23 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,41 +53,3 @@ char	*ft_itoa(int n)
 	}
 	return (str_itoa);
 }
-/*
-// Make sure your ft_itoa and ft_strdup are defined or included here
-
-void run_test(int n, const char *expected)
-{
-	char *result = ft_itoa(n);
-	if (!result)
-	{
-		printf("ft_itoa(%d) = NULL (expected: %s)\n", n, expected);
-		return;
-	}
-
-	if (strcmp(result, expected) == 0)
-		printf("✅ ft_itoa(%d) = \"%s\"\n", n, result);
-	else
-		printf("❌ ft_itoa(%d) = \"%s\" (expected: \"%s\")\n", n, result, expected);
-
-	free(result);
-}
-
-int main(void)
-{
-	run_test(7, "7");
-	run_test(-3, "-3");
-	run_test(1000, "1000");
-	run_test(-1000, "-1000");
-	run_test(999, "999");
-	run_test(-999, "-999");
-	run_test(2147483646, "2147483646");
-	run_test(-2147483647, "-2147483647");
-	run_test(0, "0");
-	run_test(12345, "12345");
-	run_test(-9876, "-9876");
-	run_test(INT_MAX, "2147483647");
-	run_test(INT_MIN, "-2147483648");
-
-	return 0;
-} */

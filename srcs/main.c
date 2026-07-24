@@ -6,21 +6,11 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:14:41 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/14 11:51:02 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/24 11:56:59 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-/*
-Get screen width and height
-int screen_w;
-int screen_h;
-
-game.mlx = mlx_init();
-mlx_get_screen_size(game.mlx, &screen_w, &screen_h);
-game.win = mlx_new_window(game.mlx, screen_w, screen_h, "Cub3D");
-*/
 
 int	detect_player(char pos)
 {
@@ -35,11 +25,6 @@ int	detect_player(char pos)
 	return (0);
 }
 
-/* void	draw_player(t_game *game)
-{
-	draw_square(&game->img, game->player.x, game->player.y, 9, 0xFD5CCD);
-} */
-
 //+32 just to center the player on the floor
 void	set_player_pos(t_game *game, int x, int y)
 {
@@ -51,8 +36,6 @@ void	set_player_pos(t_game *game, int x, int y)
 	}
 }
 
-//render_map(game);
-//draw_player(game);
 int	render_loop(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->img.img);
@@ -67,16 +50,18 @@ int	main(int argc, char **argv)
 	t_game	game;
 	t_map	*pars;
 
-	if(argc != 2)
+	if (argc != 2)
 		return (1);
 	if (parsing(&pars, argv[1]))
 		return (1);
-	if (init_game(&game, pars) == 1)
+	game.pars = pars;
+	if (init_game(&game, game.pars) == 1)
 	{
 		cleanup(&game);
 		return (1);
 	}
 	input_check(&game);
 	mlx_loop(game.mlx);
+	cleanup(&game);
 	return (0);
 }
