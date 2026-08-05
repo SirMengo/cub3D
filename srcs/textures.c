@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 12:33:40 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/24 11:52:33 by xalves           ###   ########.fr       */
+/*   Updated: 2026/08/02 16:04:12 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@ int	get_texture_pixel_color(t_img *texture, int x, int y)
 	return (color);
 }
 
-t_img	*get_wall_texture(t_game *game, float ray_x, float ray_y)
+t_img	*get_wall_texture(t_game *game, t_ray ray)
 {
-	float	fx;
-	float	fy;
-
-	fx = fmod(ray_x, 64);
-	fy = fmod(ray_y, 64);
-	if (fx < fy && fx < 64 - fy)
-		return (&game->wall_east);
-	if (fx > 64 - fy && fx > fy)
+	if (ray.side == 0)
+	{
+		if (ray.step_x > 0)
+			return (&game->wall_east);
 		return (&game->wall_west);
-	if (fy < fx && fy < 64 - fx)
-		return (&game->wall_south);
-	return (&game->wall_north);
+	}
+	else
+	{
+		if (ray.step_y > 0)
+			return (&game->wall_south);
+		return (&game->wall_north);
+	}
 }
 
 void	set_texture_x(t_game *game, t_img *tex, float rx, float ry)

@@ -6,24 +6,11 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 11:51:43 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/24 11:52:18 by xalves           ###   ########.fr       */
+/*   Updated: 2026/07/29 15:31:01 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-int	is_wall(t_game *game, float px, float py)
-{
-	int	tile_x;
-	int	tile_y;
-
-	tile_x = (int)px / BLOCK;
-	tile_y = (int)py / BLOCK;
-	if (tile_y < 0 || tile_x < 0 || \
-!game->map[tile_y] || !game->map[tile_y][tile_x])
-		return (1);
-	return (game->map[tile_y][tile_x] == '1');
-}
 
 void	look_input(int key, t_player *player)
 {
@@ -65,7 +52,7 @@ void	move_input(int key, t_game *game, float *x, float *y)
 
 void	move_player(t_game *game, float x_aux, float y_aux)
 {
-	if (!is_wall(game, x_aux, y_aux))
+	if (!hits_wall(game, x_aux, y_aux))
 	{
 		game->player.x = x_aux;
 		game->player.y = y_aux;

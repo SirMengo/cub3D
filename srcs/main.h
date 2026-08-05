@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/22 19:04:45 by xalves           ###   ########.fr       */
+/*   Updated: 2026/08/04 16:45:17 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define PI 3.14159265359
 # define PLAYER_SPEED 5
 # define CAM_SENS 0.1
-# define FOV 50
+# define FOV 60
 # define SPRITE_SIZE 64
 # define MINIMAP_BLOCK 10
 
@@ -51,6 +51,32 @@ typedef struct s_player
 	float	angle;
 	char	orientation;
 }	t_player;
+
+typedef struct s_ray
+{
+	int		map_x;
+	int		map_y;
+
+	double	dir_x;
+	double	dir_y;
+
+	double	delta_x;
+	double	delta_y;
+
+	double	side_x;
+	double	side_y;
+
+	int		step_x;
+	int		step_y;
+
+	int		side;
+	int		hit;
+
+	double	wall_dist;
+
+	double	hit_x;
+	double	hit_y;
+}	t_ray;
 
 typedef struct s_game
 {
@@ -84,6 +110,7 @@ int		detect_player(char pos);
 void	set_player_pos(t_game *game, int x, int y);
 //int		print_error(char *str);
 
+
 //init.c
 int		init_game(t_game *game, t_map *pars);
 void	init_img(t_img *img, void *mlx);
@@ -98,30 +125,36 @@ void	draw_pixel(t_img *img, int x, int y, int color);
 //void	draw_square(t_img *img, int sx, int sy, int size, int color);
 
 //collisions.c
-int		is_wall(t_game *game, float px, float py);
+int		hits_wall(t_game *game, float x, float y);
 
 //raycast.c
 void	raycast(t_game *game);
-void	render_3d(t_game *game, float dist, int i, t_img *tex);
+void	render_3d(t_game *game, float dist, int x, t_img *tex);
 
 //texture.c
 int		generate_img_ptr(t_game *game, t_img *texture, char *xpm_path);
 int		get_texture_pixel_color(t_img *texture, int x, int y);
-t_img	*get_wall_texture(t_game *game, float ray_x, float ray_y);
+t_img	*get_wall_texture(t_game *game, t_ray ray);
 void	set_texture_x(t_game *game, t_img *tex, float rx, float ry);
 
 //math_funcs.c
 float	normalize_angle(float angle);
-float	degrees_to_radians(int degrees);
+double	degrees_to_radians(double degrees);
 float	distance(float x, float y);
 int		hex_to_int(const char *hex);
 
 //movement.c
 void	player_movement(int key, t_game *game);
 
-//todelete.c
-char	**get_map_test(void);
 
 void	set_texture_x(t_game *game, t_img *tex, float rx, float ry);
-void	cast_single_ray(t_game *game, float angle, int i);
+void	cast_ray(t_game *game, float angle, int i);
+
+// cast_ray_helper.c
+void	init_ray(t_ray *ray, t_game *game, float angle);
+void	init_dda(t_ray *ray, t_game *game);
+void	perform_dda(t_ray *ray, t_game *game);
+void	calculate_hit(t_ray *ray, t_game *game);
+void	render_ray(t_game *game, t_ray *ray, int column);
+
 #endif

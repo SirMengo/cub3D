@@ -1,6 +1,8 @@
-NO sprites/North1.xpm
-WE sprites/West1.xpm
-EA sprites/East1.xpm
+NO srcs/textures/north.xpm
+SO 		 	srcs/textures/south.xpm
+WE srcs/textures/west.xpm
+EA srcs/textures/east.xpm
+
 F 			  			 		34,139,200
 C 135,206,245
 

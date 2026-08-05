@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 11:42:53 by xalves            #+#    #+#             */
-/*   Updated: 2026/07/24 11:51:58 by xalves           ###   ########.fr       */
+/*   Updated: 2026/08/04 16:44:17 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ float	normalize_angle(float angle)
 	return (angle);
 }
 
-float	degrees_to_radians(int degrees)
+double	degrees_to_radians(double degrees)
 {
-	return (degrees * PI / 180);
+	return (degrees * PI / 180.0);
 }
 
 float	distance(float x, float y)
