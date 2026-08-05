@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 15:05:20 by xalves            #+#    #+#             */
-/*   Updated: 2026/08/05 16:18:59 by xalves           ###   ########.fr       */
+/*   Updated: 2026/08/05 22:29:14 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,18 @@ void	perform_dda(t_ray *ray, t_game *game)
 	}
 }
 
-void	calculate_hit(t_ray *ray, t_game *game)
+void	calculate_hit(t_ray *ray, t_game *game, float ray_angle)
 {
-	if (ray->side == 0)
-		ray->wall_dist = ray->side_x - ray->delta_x;
-	else
-		ray->wall_dist = ray->side_y - ray->delta_y;
+	double	ray_length;
 
-	ray->hit_x = game->player.x + ray->wall_dist * BLOCK * ray->dir_x;
-	ray->hit_y = game->player.y + ray->wall_dist * BLOCK * ray->dir_y;
+	if (ray->side == 0)
+		ray_length = ray->side_x - ray->delta_x;
+	else
+		ray_length = ray->side_y - ray->delta_y;
+	ray->wall_dist = ray_length * cos(ray_angle - game->player.angle);
+
+	ray->hit_x = game->player.x + ray_length * BLOCK * ray->dir_x;
+	ray->hit_y = game->player.y + ray_length * BLOCK * ray->dir_y;
 }
 
 void	render_ray(t_game *game, t_ray *ray, int x)

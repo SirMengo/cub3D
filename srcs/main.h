@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:54:22 by xalves            #+#    #+#             */
-/*   Updated: 2026/08/04 16:45:17 by xalves           ###   ########.fr       */
+/*   Updated: 2026/08/05 22:25:37 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	cast_ray(t_game *game, float angle, int i);
 void	init_ray(t_ray *ray, t_game *game, float angle);
 void	init_dda(t_ray *ray, t_game *game);
 void	perform_dda(t_ray *ray, t_game *game);
-void	calculate_hit(t_ray *ray, t_game *game);
+void	calculate_hit(t_ray *ray, t_game *game, float ray_angle);
 void	render_ray(t_game *game, t_ray *ray, int column);
 
 #endif

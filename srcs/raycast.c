@@ -6,7 +6,7 @@
 /*   By: xalves <xavierfrpalves2@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 15:46:31 by xalves            #+#    #+#             */
-/*   Updated: 2026/08/05 22:06:05 by xalves           ###   ########.fr       */
+/*   Updated: 2026/08/05 22:26:10 by xalves           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	cast_ray(t_game *game, float angle, int x)
 	init_ray(&ray, game, angle);
 	init_dda(&ray, game);
 	perform_dda(&ray, game);
-	calculate_hit(&ray, game);
+	calculate_hit(&ray, game, angle);
 	/* if (x == WIDTH / 2)
 	{
 		printf("wall_dist = %f\n", ray.wall_dist);
