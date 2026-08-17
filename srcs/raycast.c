@@ -52,15 +52,7 @@ void	render_3d(t_game *game, float dist, int x, t_img *tex)
 		draw_pixel(&game->img, x, y++, hex_to_int(game->hex_floor));
 }
 
-void	cast_ray(t_game *game, float angle, int x)
-{
-	t_ray	ray;
-
-	init_ray(&ray, game, angle);
-	init_dda(&ray, game);
-	perform_dda(&ray, game);
-	calculate_hit(&ray, game, angle);
-	/* if (x == WIDTH / 2)
+/* if (x == WIDTH / 2)
 	{
 		printf("wall_dist = %f\n", ray.wall_dist);
 		printf("hit = (%f, %f)\n", ray.hit_x, ray.hit_y);
@@ -69,33 +61,16 @@ void	cast_ray(t_game *game, float angle, int x)
 		printf("side = %d\n", ray.side);
 		printf("dir = (%f, %f)\n", ray.dir_x, ray.dir_y);
 	} */
+void	cast_ray(t_game *game, float angle, int x)
+{
+	t_ray	ray;
+
+	init_ray(&ray, game, angle);
+	init_dda(&ray, game);
+	perform_dda(&ray, game);
+	calculate_hit(&ray, game, angle);
 	render_ray(game, &ray, x);
 }
-
-
-/*
-void	cast_ray(t_game *game, float angle, int i)
-{
-	float	cx;
-	float	cy;
-	float	dist;
-	t_img	*tex;
-
-	game->ray_x = game->player.x;
-	game->ray_y = game->player.y;
-	cx = cos(angle);
-	cy = sin(angle);
-	while (!ray_hitting_wall(game->ray_x, game->ray_y, game))
-	{
-		game->ray_x += cx;
-		game->ray_y += cy;
-	}
-	dist = distance(game->ray_x - game->player.x, game->ray_y - game->player.y);
-	dist = dist * cos(angle - game->player.angle);
-	tex = get_wall_texture(game, game->ray_x, game->ray_y);
-	set_texture_x(game, tex, game->ray_x, game->ray_y);
-	render_3d(game, dist, i, tex);
-} */
 
 void	fan_raycast(t_game *game, float angle, float fov)
 {

@@ -108,8 +108,6 @@ typedef struct s_game
 int		render_loop(t_game *game);
 int		detect_player(char pos);
 void	set_player_pos(t_game *game, int x, int y);
-//int		print_error(char *str);
-
 
 //init.c
 int		init_game(t_game *game, t_map *pars);
@@ -145,7 +143,6 @@ int		hex_to_int(const char *hex);
 
 //movement.c
 void	player_movement(int key, t_game *game);
-
 
 void	set_texture_x(t_game *game, t_img *tex, float rx, float ry);
 void	cast_ray(t_game *game, float angle, int i);

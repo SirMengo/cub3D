@@ -30,8 +30,8 @@ int	hits_wall(t_game *game, float x, float y)
 	int	margin;
 
 	margin = 10;
-	return (is_wall(game, x + margin, y + margin)
-		|| is_wall(game, x - margin, y + margin)
-		|| is_wall(game, x + margin, y - margin)
-		|| is_wall(game, x - margin, y - margin));
+	return (is_wall(game, x + margin, y + margin) \
+|| is_wall(game, x - margin, y + margin) \
+|| is_wall(game, x + margin, y - margin) \
+|| is_wall(game, x - margin, y - margin));
 }
